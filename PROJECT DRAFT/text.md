@@ -22,8 +22,7 @@ API for countries: https://rapidapi.com/collection/coronavirus-covid-19
 API (35$ a month or web scraping?):  https://www.worldometers.info/coronavirus/
 
 
-
-# Problematic
+# Problematic
 
 Covid-19, SARS-Cov-2, Coronavirus are probably the most used words for the last few months and will be the hot topic for this beginning of 2020.
 This new virus was discovered in Wuhan (China) late 2019. It belongs to the coronavirus family and gives Covid-19 disease to humans. This disease symptoms are mainly : cough, cold, headache, fever, pneunomia, etc. Being very virulent and extremmely contagious, it's rapidly spreading and lead to thousands of deaths since hospitals are not able to provide respiratory support for needy patients. Since it's unknown to any human's immunity system, people want to contain the spreading in order to avoid deaths due to the lack of hospital equipments.
