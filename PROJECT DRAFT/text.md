@@ -1,3 +1,4 @@
+<div style="text-align: justify">
 ### Dataset
 
 One big issue with choosing this subject is that we have only limited data: the virus started to spread officially from December 2019, and most of the dataset on the internet contains data from mid-january only.
@@ -47,8 +48,10 @@ Show some basic statistics and get insights about the data:__
 - for symptoms: some rows contains several symptoms together, we need to melt the data in order to use this
 - we have summary for 1086 patients (text) that we want to do wordcloud
 
-The dataset 1. contains data for 171 countries. We have data for deaths/confirmed/recovered cases from 22th January 2020 to 22th March 2020 for now.
+The dataset 1 contains data for 171 countries. We have data for deaths/confirmed/recovered cases from 22th January 2020 to 22th March 2020 for now.
+
 Looking closer to the data (COVID19_open_line_list.csv), we have lots of NaN for symptoms, sex, chronic disease,...
+
 COVID19_line_list_data.csv contains data about patients but only 1'085 rows on this file.
 
 #### Dataset 2
@@ -57,7 +60,7 @@ Contains the number of confirmed cases for all 26 cantons in Switzerland and is 
 Unfortunately, for now, we have data from the 6th March 2020 to 19th March 2020. We don't have data before it, but the dataset might get updated and we will be able to get the data after the 19th March 2020.
 
 #### Dataset 3
-This is a github respository that contains several datasets. They're the one that built the COVID-19 situation dashboard for the World Health Organization (WHO).
+This is a github respository that contains several datasets. They're the one that built the [COVID-19 situation dashboard for the World Health Organization (WHO)](https://experience.arcgis.com/experience/685d0ace521648f8a5beeeee1b9125cd).
 
 With daily update from 22th January 2020, this dataset contains data country by country, day by day, the number of confirmed/death/recovered/active cases.
 Not only country by country, we also have details for cities for bigger countries such as US where we have details cities by cities (big cities). They provide also a column called __combined_Key__ which allows to quickly look for cities.
@@ -68,9 +71,12 @@ This contains plenty of data, and one hard work will be to determine which data 
 
 __What others have already done with the data?__
 - https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6
+- https://www.covidvisualizer.com
+- http://coronaboard.ch
+- https://www.corona-data.ch
 
 
-__Why is your approach original?__
+__Why is our approach original?__
 
 By combining measured **facts** with an **interactive** platform, we're being original. Indeed, it amplifies the cognition with the data and lots of the websites provide only counters and graphs for now which don't allow to dive into the data. Moreover, we would like to measure its impact on other domains (we've considered only economical impact for now).
 
@@ -80,12 +86,10 @@ __What source of inspiration do you take? Visualizations that you found on other
 - https://www.worldometers.info/coronavirus/coronavirus-cases/
 - https://experience.arcgis.com/experience/685d0ace521648f8a5beeeee1b9125cd
 - https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6
-- https://www.covidvisualizer.com
-- http://coronaboard.ch
-- https://www.corona-data.ch
 
 
 
+</div>
 
 ---- THINGS ON GRAM
 1. Montrer que c’est pire qu’une grippe
