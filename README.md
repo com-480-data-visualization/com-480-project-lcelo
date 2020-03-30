@@ -1,5 +1,8 @@
 # Project of Data Visualization (COM-480)
 
+
+[Guidelines](https://com-480-data-visualization.github.io/2020-project-guidelines/)
+
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Jeanne CHAVEROT | 246457 |
