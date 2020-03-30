@@ -1,4 +1,3 @@
-<div style="text-align: justify">
 ### Dataset
 
 One big issue with choosing this subject is that we have only limited data: the virus started to spread officially from December 2019, and most of the dataset on the internet contains data from mid-january only.
@@ -88,8 +87,6 @@ __What source of inspiration do you take? Visualizations that you found on other
 - https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6
 
 
-
-</div>
 
 ---- THINGS ON GRAM
 1. Montrer que c’est pire qu’une grippe
