@@ -1,0 +1,26 @@
+
+
+:root {
+  --prussian-blue:#003049;
+  --maximum-red: #D62828;
+  --amber: #F77F00;
+  --maximum-yellow-red: #FCBF49;
+  --lemon-meringue: #EAE2B7;
+
+}
+
+
+body {
+  background-color: var(--prussian-blue);
+}
+
+h1 {
+  color: var(--maximum-red);
+  text-align: center;
+  background: var(maximum-yellow-red);
+  padding: 10px;
+}
+
+h2 {
+  color: var(--amber);
+}
