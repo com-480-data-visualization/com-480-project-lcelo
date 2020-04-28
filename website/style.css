@@ -1,20 +1,22 @@
-/*prussian-blue: #003049;
-  maximum-red: #D62828;
-  amber: #F77F00;
-  maximum-yellow-red: #FCBF49;
-  lemon-meringue: #EAE2B7;
-*/
+:root {
+  --prussian-blue:#003049;
+  --maximum-red: #D62828;
+  --amber: #F77F00;
+  --maximum-yellow-red: #FCBF49;
+  --lemon-meringue: #EAE2B7;
+
+}
 
 body {
-  background-color: #003049;
+  background-color: var(--prussian-blue);
 }
 
 h1 {
-  color: #D62828;
+  color: var(--maximum-red);
   text-align: center;
-  background: #FCBF49;
+  background: var(maximum-yellow-red);
 }
 
 h2 {
-  color: #F77F00;
+  color: var(--amber);
 }
