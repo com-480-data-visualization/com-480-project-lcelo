@@ -14,9 +14,13 @@ body {
 h1 {
   color: var(--maximum-red);
   text-align: center;
-  background: var(maximum-yellow-red);
+  background-color: var(--lemon-meringue);
+  margin: auto;
+  padding: 10px;
 }
 
 h2 {
   color: var(--amber);
+  margin: auto;
+  padding: 10px;
 }
