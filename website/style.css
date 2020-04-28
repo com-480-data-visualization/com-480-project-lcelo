@@ -1,25 +1,20 @@
-
-
-:root {
-  --prussian-blue:#003049;
-  --maximum-red: #D62828;
-  --amber: #F77F00;
-  --maximum-yellow-red: #FCBF49;
-  --lemon-meringue: #EAE2B7;
-
-}
-
+/*prussian-blue: #003049;
+  maximum-red: #D62828;
+  amber: #F77F00;
+  maximum-yellow-red: #FCBF49;
+  lemon-meringue: #EAE2B7;
+*/
 
 body {
-  background-color: var(--prussian-blue);
+  background-color: #003049;
 }
 
 h1 {
-  color: var(--maximum-red);
+  color: #D62828;
   text-align: center;
-  background: var(maximum-yellow-red);
+  background: #FCBF49;
 }
 
 h2 {
-  color: var(--amber);
+  color: #F77F00;
 }
