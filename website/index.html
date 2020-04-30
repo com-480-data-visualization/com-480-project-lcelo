@@ -1,48 +1,202 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Transitive by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>LCELO</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
 
-<head>
-  <meta charset="utf-8">
+		<!-- LIB D3JS -->
+		<script src="lib/d3.min.js"></script>
+		<script src="lib/topojson.min.js"></script>
+		<script src="main.js"></script>
+	</head>
+	<body>
 
-  <title>LCELO</title>
-  <meta name="author" content="Aslam Cader, Etienne Caquot, Jeanne Chaverot">
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="logo"><a href="index.html">LCELO <span>for Data Visualisation - EPFL</span></a></div>
+				<!-- <a href="#menu" class="toggle"><span>Menu</span></a> -->
+			</header>
 
-  <link rel="stylesheet" href="style.css">
+		<!-- Nav -->
+			<!-- <nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="generic.html">Generic</a></li>
+					<li><a href="elements.html">Elements</a></li>
+				</ul>
+			</nav> -->
 
-</head>
-<body>
-  <h1>Welcome to the LCELO team's website!</h1>
+		<!-- Banner -->
+		<!--
+			To use a video as your background, set data-video to the name of your video without
+			its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
+			formats to work correctly.
+		-->
+			<section id="banner" data-video="images/banner_k">
+				<div class="inner">
+					<h1>Covid-19 in Switzerland</h1>
+					<p>This virus changed our way of living. We want to see its impact on Switzerland.<br>
+						  How did the virus impact the Swiss population?<br>
+							<em>"Our aim is to create awareness" - Jeanne, Etienne and Aslam</em>
+					</p>
+					<a href="#one" class="button special scrolly">Let's begin</a>
+				</div>
+			</section>
 
-  <!--<div>
-      <img src="https://i.kym-cdn.com/entries/icons/mobile/000/033/381/dancing_coffin.jpg" alt="Coffin">
-  </div>-->
 
-  <h2>Map of Switzerland</h2>
 
-  <svg id="map-plot" viewBox="0 0 960 500" width="100%">
-  	<style>
-  		.canton {
-  			stroke: rgb(127, 127, 127);
-  			stroke-width: 1px;
-  		}
+			<!-- MAP -->
+				<section id="one" class="wrapper style2">
+					<div class="inner">
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<!-- <img src="images/pic01.jpg" alt="" /> -->
+									<svg id="map-plot" viewBox="0 0 960 500" width="100%">
+								  	<style>
+								  		.canton {
+								  			stroke: rgb(127, 127, 127);
+								  			stroke-width: 1px;
+								  		}
 
-  		.canton-label {
-  			fill: white;
-  			text-anchor: middle;
-  			font-size: 10pt;
-  		}
+								  		.canton-label {
+								  			fill: white;
+								  			text-anchor: middle;
+								  			font-size: 10pt;
+								  		}
 
-  	</style>
-  </svg>
+								  	</style>
+								  </svg>
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>MAP Switzerland</h2>
+										<p>#StayAtHome</p>
+									</header>
+									<hr />
+									<p> Seeing this is heartbreaking.</p>
+									<!-- <p>Behind these numbers are real humans.</p> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 
-  <h2>Other visualisations...</h2>
 
-  <!--<a href="docs/other_page.html">docs</a>
+				<!-- Graphs for Switzerland (Hospitalisation stats) -->
+				<section id="twoOG" class="wrapper style3">
+					<div class="inner">
 
-  <a href="other_page.html">no docs</a>-->
+						<div class="image fit">
+							<img src="images/hospitalisation.jpeg" width="80%" height="80%" alt="" />
+						</div>
 
-  <script src="lib/d3.min.js"></script>
-  <script src="lib/topojson.min.js"></script>
-  <script src="main.js"></script>
-</body>
+						<div class="content">
+							<header class="align-center">
+								<h2>Graphs for Switzerland (Hospitalisation stats)</h2>
+								<p>#KeepSocialDistancing</p>
+							</header>
+							<hr />
+							<p>Here we see the people that are suffering from this disease. Those hospitalised people are either in normal ward, or in ICU, or with a ventilator.</p>
+							<p>Remember that if someone is hospitalised, there's a whole family worried behind.</p>
+							<!-- <p>Behind these numbers are real humans.</p> -->
+						</div>
+					</div>
+				</section>
+
+				<!-- Switzerland vs the world -->
+				<section id="Symptoms" class="wrapper style4">
+					<div class="inner">
+						<div>
+							<div class="box2">
+								<div class="image fit">
+									<img src="images/swiss_vs_world.jpeg" alt="swiss_vs_world" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>Switzerland vs the world</h2>
+										<p>Look how we did great compared to other countries.</p>
+									</header>
+									<hr />
+									<p></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!--  Comparison with seasonal flu -->
+				<section id="twoOG" class="wrapper style5">
+					<div class="inner">
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img src="images/seasonal_flu.png" alt="" />
+
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>Comparison with seasonal flu</h2>
+										<p>#DontTouchYourFace</p>
+									</header>
+									<hr />
+									<p>People that were saying, it's gonna be less than a seasonal flu were wrong.</p>
+									<!-- <p>Behind these numbers are real humans.</p> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!--  Symptoms (wordcloud)-->
+				<section id="Symptoms" class="wrapper style2">
+					<div class="inner">
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img src="images/wordcloud.jpeg" alt="wordcloud" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>Wordcloud using the symptoms</h2>
+										<p>Using the described symptoms, we wanted to show you, in an original way, the symptoms. Bigger they are, the more frequent they were.</p>
+									</header>
+									<hr />
+									<p></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper">
+				<div class="inner">
+
+					<div class="copyright">
+						&copy; Team LCELO 2020. All rights reserved. <br>
+						  This project was conducted during the Data Visualisation course (Spring 2020) at EPFL.
+
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
