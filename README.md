@@ -3,6 +3,8 @@
 
 [Guidelines](https://com-480-data-visualization.github.io/2020-project-guidelines/)
 
+[Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/)
+
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Jeanne CHAVEROT | 246457 |
