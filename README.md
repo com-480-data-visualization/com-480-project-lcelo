@@ -112,6 +112,9 @@ __What source of inspiration do you take? Visualizations that you found on other
 
 **10% of the final grade**
 
+[Milestone 2 Report describing the goal of the project](docs/LCELO_milestone2_dataviz.pdf)
+
+[Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/)
 
 
 
