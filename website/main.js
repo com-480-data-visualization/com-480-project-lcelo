@@ -53,6 +53,7 @@ class MapPlot {
 			.style('stroke-width', '1px')
 	}*/
 
+
 	constructor(svg_element_id) {
 		this.svg = d3.select('#' + svg_element_id);
 
@@ -77,17 +78,11 @@ class MapPlot {
 
 		//colormap for population density
 		const color_scale = d3.scaleLinear()
-			.range(["hsl(62,100%,90%)", "hsl(228,30%,20%)"])
-			.interpolate(d3.interpolateHcl);
+			.range(["rgb(255,255,255)", "rgb(255,0,0)"])
+			.interpolate(d3.interpolateRgb);
 
-		const cases_promise = d3.csv("data/switzerland/covid19_cases_switzerland.csv").then((data) => {
-			let date_to_cases = {};
-			data.forEach((row) => {
-				console.log(row);
-				date_to_cases[row.Date] =  Object.assign({}, row);
-				delete date_to_cases[row.Date].Date;
-			});
-			return date_to_cases["2020-03-25"];
+		const cases_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean.json").then((data) => {
+			return data
 		});
 
 		const map_promise = d3.json("data/map/ch-cantons.json").then((topojson_raw) => {
@@ -110,18 +105,17 @@ class MapPlot {
 			let cases_data = results[0];
 			let map_data = results[1];
 
-
 			//let point_data = results[2];
 
 			map_data.forEach(canton => {
-				canton.properties.cases = parseFloat(cases_data[canton.id]);
+				canton.properties.cases = cases_data[canton.id];
 			});
 
-			const cases = Object.values(cases_data).map(Number);
 			// color_scale.domain([d3.quantile(densities, .01), d3.quantile(densities, .99)]);
-			color_scale.domain([0, 11892]);
+			color_scale.domain([0, 5013]);
 
-			console.log(color_scale(11892));
+
+			//console.log(color_scale(11892));
 
 			// Order of creating groups decides what is on top
 			this.map_container = this.svg.append('g');
@@ -130,13 +124,13 @@ class MapPlot {
 			//this.label_container = this.svg.append('g'); // <- is on top
 
 			//color the map according to the density of each canton
-			this.map_container.selectAll(".canton")
+			var cantons = this.map_container.selectAll(".canton")
 				.data(map_data)
 				.enter()
 				.append("path")
 				.classed("canton", true)
 				.attr("d", path_generator)
-				.style("fill", (d) => color_scale(d.properties.cases));
+				.style("fill", (d) => color_scale(null));
 
 			this.cases_container.selectAll(".canton-label")
 				.data(map_data)
@@ -162,8 +156,123 @@ class MapPlot {
 				;
 
 			this.makeColorbar(this.svg, color_scale, [50, 30], [20, this.svg_height - 2*30]);*/
+
+			/// SLIDER ///
+		var dates = Object.keys(cases_data['AG']);
+
+		var startDate = new Date(dates[0]);
+
+		var endDate = new Date(dates[dates.length - 1]);
+
+		var formatDateIntoYear = d3.timeFormat("%d %b");
+		var formatDate = d3.timeFormat("%d %B");
+		var formatFromSlider = d3.timeFormat("%Y-%m-%d")
+
+		var slider_margin = {top:0, right:50, bottom:0, left:50};
+
+		var slider_svg = d3.select('#slider');
+
+		const svg_slider_viewbox = slider_svg.node().viewBox.animVal;
+		const svg_slider_width = svg_slider_viewbox.width - slider_margin.left - slider_margin.right;
+		const svg_slider_height = svg_slider_viewbox.height  - slider_margin.top - slider_margin.bottom;
+
+		var moving = false;
+		var currentValue = 0;
+		var targetValue = svg_slider_width;
+		var timer = 0;
+
+		var playButton = d3.select("#play-button");
+
+		var x = d3.scaleTime()
+		    .domain([startDate, endDate])
+		    .range([0, svg_slider_width])
+		    .clamp(true);
+
+		var slider = slider_svg.append("g")
+		    .attr("class", "slider")
+				.attr("transform", "translate(" + slider_margin.left + "," + svg_slider_height/2 + ")");
+
+				slider.append("line")
+		    .attr("class", "track")
+		    .attr("x1", x.range()[0])
+		    .attr("x2", x.range()[1])
+				.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+		    .attr("class", "track-inset")
+				.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+		    .attr("class", "track-overlay")
+		    .call(d3.drag()
+					.on("start.interrupt", function() { slider.interrupt(); })
+					.on("start drag", function() {
+						currentValue = d3.event.x;
+          	update(x.invert(currentValue));
+					})
+				);
+
+		slider.insert("g", ".track-overlay")
+		    .attr("class", "ticks")
+		    .attr("transform", "translate(0," + 18 + ")")
+		  .selectAll("text")
+		    .data(x.ticks(10))
+		    .enter()
+		    .append("text")
+		    .attr("x", x)
+		    .attr("y", 10)
+		    .attr("text-anchor", "middle")
+		    .text(function(d) { return formatDateIntoYear(d); });
+
+		var label = slider.append("text")
+		    .attr("class", "label")
+		    .attr("text-anchor", "middle")
+		    .text(formatDate(startDate))
+		    .attr("transform", "translate(0," + (-25) + ")")
+
+		var handle = slider.insert("circle", ".track-overlay")
+		    .attr("class", "handle")
+		    .attr("r", 9);
+
+		playButton
+			.on("click", function() {
+				var button = d3.select(this);
+		    if (button.text() == "Pause") {
+		      moving = false;
+		      clearInterval(timer);
+		      // timer = 0;
+		      button.text("Play");
+		    } else {
+		      moving = true;
+		      timer = setInterval(step, 100);
+		      button.text("Pause");
+		    }
+		    console.log("Slider moving: " + moving);
+		  });
+
+		function step() {
+			update(x.invert(currentValue));
+		  currentValue = currentValue + (targetValue/151);
+		  if (currentValue > targetValue) {
+		    moving = false;
+		    currentValue = 0;
+		    clearInterval(timer);
+		    // timer = 0;
+		    playButton.text("Play");
+		    console.log("Slider moving: " + moving);
+		  }
+	}
+
+		function update(pos) {
+		  handle.attr("cx", x(pos));
+		  label
+		    .attr("x", x(pos))
+		    .text(formatDate(pos));
+
+			var date = formatFromSlider(pos);
+
+			cantons.style("fill", (d) => color_scale(d.properties.cases[date]));
+		}
 		});
 	}
+
+
 }
 
 function whenDocumentLoaded(action) {
