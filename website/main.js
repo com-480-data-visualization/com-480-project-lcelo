@@ -63,6 +63,7 @@ class MapPlot {
 		this.svg_height = svg_viewbox.height;
 
 
+
 		// D3 Projection
 		// similar to scales
 		const projection = d3.geoNaturalEarth1()
@@ -120,6 +121,15 @@ class MapPlot {
 			// Order of creating groups decides what is on top
 			this.map_container = this.svg.append('g');
 			this.cases_container = this.svg.append('g');
+
+			this.svg.append("circle").attr("cx",20).attr("cy",50).attr("r", 6).style("fill", "#ffbaba")
+			this.svg.append("circle").attr("cx",20).attr("cy",70).attr("r", 6).style("fill", "#ff7b7b")
+			this.svg.append("circle").attr("cx",20).attr("cy",90).attr("r", 6).style("fill", "#e71414")
+
+
+			this.svg.append("text").attr("x", 40).attr("y", 50).text("Less than 0.6% Infected").style("font-size", "15px").attr("alignment-baseline","middle")
+			this.svg.append("text").attr("x", 40).attr("y", 70).text("Between 0.6 and 0.8% Infected").style("font-size", "15px").attr("alignment-baseline","middle")
+			this.svg.append("text").attr("x", 40).attr("y", 90).text("More than 0.8% infected").style("font-size", "15px").attr("alignment-baseline","middle")
 
 			//this.label_container = this.svg.append('g'); // <- is on top
 
@@ -191,6 +201,10 @@ class MapPlot {
 		var slider = slider_svg.append("g")
 		    .attr("class", "slider")
 				.attr("transform", "translate(" + slider_margin.left + "," + svg_slider_height/2 + ")");
+
+		var legend = slider_svg.append("g")
+				.attr('class','legend')
+
 
 				slider.append("line")
 		    .attr("class", "track")
@@ -271,6 +285,8 @@ class MapPlot {
 		}
 		});
 	}
+
+
 
 
 }
