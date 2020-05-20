@@ -81,7 +81,7 @@ class MapPlot {
 			.range(["rgb(255,255,255)", "rgb(255,0,0)"])
 			.interpolate(d3.interpolateRgb);
 
-		const cases_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean.json").then((data) => {
+		const cases_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean_densities.json").then((data) => {
 			return data
 		});
 
@@ -112,7 +112,7 @@ class MapPlot {
 			});
 
 			// color_scale.domain([d3.quantile(densities, .01), d3.quantile(densities, .99)]);
-			color_scale.domain([0, 5013]);
+			color_scale.domain([0, 1]);
 
 
 			//console.log(color_scale(11892));
