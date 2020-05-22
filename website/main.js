@@ -429,7 +429,7 @@ class MapPlot {
 					}
 					d3.select("#map-plot").select("#colorbar").remove();
 					d3.select("defs").remove();
-					plot_object.makeColorbar(d3.select('#' + svg_element_id), color_scale_cases_d, [40, 30], [20, d3.select('#' + svg_element_id).node().viewBox.animVal.height - 2*30],".3f%");
+					plot_object.makeColorbar(d3.select('#' + svg_element_id), color_scale_cases_d, [40, 30], [20, d3.select('#' + svg_element_id).node().viewBox.animVal.height - 2*30],".3f");
 				}
 			});
 
