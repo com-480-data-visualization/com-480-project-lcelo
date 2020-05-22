@@ -148,6 +148,7 @@
 							<div class="box">
 								<div class="image fit">
 									<!-- <img src="images/pic01.jpg" alt="" /> -->
+									<div id="test">
 									<svg id="map-plot" viewBox="0 0 960 500" width="100%">
 								  	<style>
 								  		.canton {
@@ -161,8 +162,19 @@
 								  			font-size: 10pt;
 								  		}
 
+											.tooltip {
+												background-color: black;
+											  border: none;
+											  border-radius: 5px;
+											  padding: 15px;
+											  min-width: 400px;
+											  text-align: left;
+												color: white;
+											}
+
 								  	</style>
 								  </svg>
+								</div>
 								</div>
 								<div>
 									<svg id="slider" viewBox="0 0 960 100" width="100%">
@@ -209,26 +221,24 @@
 								    }
 										</style>
 									</svg>
-									<button id="play-button">Play
-										<style>
-											#play-button {
-											 	background: #f08080;
-											 	padding-right: 26px;
-											 	border-radius: 3px;
-											 	border: none;
-											 	color: white;
-											 	margin: 0;
-											 	padding: 0 12px;
-											 	width: 60px;
-											 	cursor: pointer;
-											 	height: 30px;
-											 }
+									<button id="play-button">Play</button>
+								</div>
+								<div id="outerr">
+									<div class="innerr"><button id ="case-btn">Cases</button></div>
+									<div class="innerr"><button id ="death-btn">Deaths</button></div>
+									<div class="innerr"><button id ="recov-btn">Recovered</button></div>
 
-										 #play-button:hover {
-												background-color: #696969;
-										 }
-									 </style>
-									</button>
+									<style>
+										#outerr{
+											width:100%;
+											text-align: center;
+										}
+										.innerr{
+											display: inline-block;
+											margin-left: 1cm;
+											margin-right: 1cm;
+										}
+									</style>
 								</div>
 								<div class="content">
 									<header class="align-center">

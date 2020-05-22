@@ -1,6 +1,10 @@
 class MapPlot {
 
-	/*makeColorbar(svg, color_scale, top_left, colorbar_size, scaleClass=d3.scaleLog) {
+	makeColorbar(svg, color_scale, top_left, colorbar_size, scaleClass=d3.scaleLinear) {
+		console.log(svg);
+		console.log(color_scale);
+		console.log(top_left);
+		console.log(colorbar_size);
 
 		const value_to_svg = scaleClass()
 			.domain(color_scale.domain())
@@ -51,7 +55,7 @@ class MapPlot {
 			.style('fill', 'url(#colorbar-gradient)')
 			.style('stroke', 'black')
 			.style('stroke-width', '1px')
-	}*/
+	}
 
 
 	constructor(svg_element_id) {
@@ -61,7 +65,6 @@ class MapPlot {
 		const svg_viewbox = this.svg.node().viewBox.animVal;
 		this.svg_width = svg_viewbox.width;
 		this.svg_height = svg_viewbox.height;
-
 
 		// D3 Projection
 		// similar to scales
@@ -76,12 +79,29 @@ class MapPlot {
 		const path_generator = d3.geoPath()
 			.projection(projection);
 
-		//colormap for population density
-		const color_scale = d3.scaleLinear()
+		//Three color map, one per category
+		const color_scale_cases = d3.scaleLinear()
+			.range(["rgb(255,255,255)", "rgb(0,0,255)"])
+			.interpolate(d3.interpolateRgb);
+
+		const color_scale_death = d3.scaleLinear()
 			.range(["rgb(255,255,255)", "rgb(255,0,0)"])
 			.interpolate(d3.interpolateRgb);
 
+		const color_scale_recov = d3.scaleLinear()
+			.range(["rgb(255,255,255)", "rgb(0,255,0)"])
+			.interpolate(d3.interpolateRgb);
+
+		//Get the data
 		const cases_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean.json").then((data) => {
+			return data
+		});
+
+		const death_promise = d3.json("data/switzerland/covid19_fatalities_switzerland_openzh_clean.json").then((data) => {
+			return data
+		});
+
+		const recov_promise = d3.json("data/switzerland/covid19_released_switzerland_openzh_clean.json").then((data) => {
 			return data
 		});
 
@@ -90,189 +110,282 @@ class MapPlot {
 			return canton_paths.features;
 		});
 
-		/*const point_promise = d3.csv("data/locations.csv").then((data) => {
-			let new_data = [];
 
-			for(let idx = 0; idx < data.length; idx += 10) {
-				new_data.push(data[idx]);
-			}
-
-			return new_data;
-		});*/
-
-
-		Promise.all([cases_promise, map_promise]).then((results) => {
+		Promise.all([cases_promise, death_promise, recov_promise, map_promise]).then((results) => {
 			let cases_data = results[0];
-			let map_data = results[1];
+			let death_data = results[1];
+			let recov_data = results[2];
+			let map_data = results[3];
 
-			//let point_data = results[2];
-
+			//add the data as a property of the canton
 			map_data.forEach(canton => {
 				canton.properties.cases = cases_data[canton.id];
+				canton.properties.deaths = death_data[canton.id];
+				canton.properties.recovs = recov_data[canton.id];
 			});
 
-			// color_scale.domain([d3.quantile(densities, .01), d3.quantile(densities, .99)]);
-			color_scale.domain([0, 5013]);
+			//update domain of each color scale
+			color_scale_cases.domain([0, 5013]);
+			color_scale_death.domain([0, 401]);
+			color_scale_recov.domain([0, 1075]);
 
+			//---------- TOOLTIP ----------//
 
-			//console.log(color_scale(11892));
+			var current_canton = ""; //to know the canton in which the mouse is
 
-			// Order of creating groups decides what is on top
+			var update_tt = false; // if should update the tooltip (mouse is in a canton)
+
+			//tooltip
+			var tooltip2 = d3.select("#test")
+			.append("div")
+	    .style("position", "absolute")
+	    .style("visibility", "hidden")
+	    .style("background-color", "white")
+	    .style("border", "solid")
+	    .style("border-width", "1px")
+	    .style("border-radius", "5px")
+	    .style("padding", "10px");
+
+			// Three function that change the tooltip when user hover / move / leave a cell
+			var mouseover = function(d) {
+				console.log("enter")
+				current_canton = d;
+				update_tt = true;
+				tooltip2
+					.style("opacity", 1)
+					.style("visibility", "visible")
+					.style("left", (d3.mouse(this)[0]) + "px")
+					.style("top", (d3.mouse(this)[1]) + "px")
+			}
+
+			var mousemove = function(d) {
+				console.log(d.id);
+				var date = formatFromSlider(x.invert(currentValue));
+				console.log(d3.mouse(this));
+				tooltip2
+				.style("opacity", 1)
+					.html("Cases: " + d.properties.cases[date] + "<br> Deaths: " + d.properties.deaths[date] + "<br> Recovered: " + d.properties.recovs[date])
+					.style("left", (d3.mouse(this)[0]) + "px")
+					.style("top", (d3.mouse(this)[1]) + "px")
+			}
+
+			var mouseout = function(d) {
+				console.log("leave")
+				update_tt = false;
+				tooltip2
+				.style("opacity", 0)
+				.style("visibility", "hidden")
+			}
+
+			 d3.select("#test").on("mouseleave",mouseout)
+
+			//---------- MAP ----------//
 			this.map_container = this.svg.append('g');
-			this.cases_container = this.svg.append('g');
-
-			//this.label_container = this.svg.append('g'); // <- is on top
-
-			//color the map according to the density of each canton
+			this.label_container = this.svg.append('g');
+			//draw canton
 			var cantons = this.map_container.selectAll(".canton")
 				.data(map_data)
 				.enter()
 				.append("path")
 				.classed("canton", true)
 				.attr("d", path_generator)
-				.style("fill", (d) => color_scale(null));
+				.style("fill", (d) => color_scale_cases(null))
+				.on("mouseover", mouseover)
+      	.on("mousemove", mousemove)
+      	//.on("mouseleave", mouseout);
 
-			this.cases_container.selectAll(".canton-label")
+			// put the names of canton
+			this.label_container.selectAll(".canton-label")
 				.data(map_data)
 				.enter().append("text")
 				.classed("canton-label", true)
 				.attr("transform", (d) => "translate(" + path_generator.centroid(d) + ")")
-				//.translate((d) => path_generator.centroid(d))
 				.attr("dy", ".35em")
-				.text((d) => d.properties.name);
+				.text((d) => d.id);
 
-		/*	const r = 3;
+			plot_object.makeColorbar(this.svg, color_scale_cases, [40, 30], [20, this.svg_height - 2*30]);
 
+			//---------- DATA BUTTONS ----------//
+			var caseButton = d3.select("#case-btn");
+			var deathButton = d3.select("#death-btn");
+			var recovButton = d3.select("#recov-btn");
 
-			this.point_container.selectAll(".point")
-				.data(point_data)
-				.enter()
-				.append("circle")
-				.classed("point", true)
-				.attr("r", r)
-				.attr("cx", -r)
-				.attr("cy", -r)
-				.attr("transform", (d) => "translate(" + projection([d.lon, d.lat]) + ")")
-				;
-
-			this.makeColorbar(this.svg, color_scale, [50, 30], [20, this.svg_height - 2*30]);*/
-
-			/// SLIDER ///
-		var dates = Object.keys(cases_data['AG']);
-
-		var startDate = new Date(dates[0]);
-
-		var endDate = new Date(dates[dates.length - 1]);
-
-		var formatDateIntoYear = d3.timeFormat("%d %b");
-		var formatDate = d3.timeFormat("%d %B");
-		var formatFromSlider = d3.timeFormat("%Y-%m-%d")
-
-		var slider_margin = {top:0, right:50, bottom:0, left:50};
-
-		var slider_svg = d3.select('#slider');
-
-		const svg_slider_viewbox = slider_svg.node().viewBox.animVal;
-		const svg_slider_width = svg_slider_viewbox.width - slider_margin.left - slider_margin.right;
-		const svg_slider_height = svg_slider_viewbox.height  - slider_margin.top - slider_margin.bottom;
-
-		var moving = false;
-		var currentValue = 0;
-		var targetValue = svg_slider_width;
-		var timer = 0;
-
-		var playButton = d3.select("#play-button");
-
-		var x = d3.scaleTime()
-		    .domain([startDate, endDate])
-		    .range([0, svg_slider_width])
-		    .clamp(true);
-
-		var slider = slider_svg.append("g")
-		    .attr("class", "slider")
-				.attr("transform", "translate(" + slider_margin.left + "," + svg_slider_height/2 + ")");
-
-				slider.append("line")
-		    .attr("class", "track")
-		    .attr("x1", x.range()[0])
-		    .attr("x2", x.range()[1])
-				.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-		    .attr("class", "track-inset")
-				.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-		    .attr("class", "track-overlay")
-		    .call(d3.drag()
-					.on("start.interrupt", function() { slider.interrupt(); })
-					.on("start drag", function() {
-						currentValue = d3.event.x;
-          	update(x.invert(currentValue));
-					})
-				);
-
-		slider.insert("g", ".track-overlay")
-		    .attr("class", "ticks")
-		    .attr("transform", "translate(0," + 18 + ")")
-		  .selectAll("text")
-		    .data(x.ticks(10))
-		    .enter()
-		    .append("text")
-		    .attr("x", x)
-		    .attr("y", 10)
-		    .attr("text-anchor", "middle")
-		    .text(function(d) { return formatDateIntoYear(d); });
-
-		var label = slider.append("text")
-		    .attr("class", "label")
-		    .attr("text-anchor", "middle")
-		    .text(formatDate(startDate))
-		    .attr("transform", "translate(0," + (-25) + ")")
-
-		var handle = slider.insert("circle", ".track-overlay")
-		    .attr("class", "handle")
-		    .attr("r", 9);
-
-		playButton
+			caseButton
 			.on("click", function() {
-				var button = d3.select(this);
-		    if (button.text() == "Pause") {
-		      moving = false;
-		      clearInterval(timer);
-		      // timer = 0;
-		      button.text("Play");
-		    } else {
-		      moving = true;
-		      timer = setInterval(step, 100);
-		      button.text("Pause");
-		    }
-		    console.log("Slider moving: " + moving);
-		  });
+				case_b = true;
+				death_b = false;
+				if (!moving) {
+					var date = formatFromSlider(x.invert(currentValue));
+					cantons.style("fill", (d) => color_scale_cases(d.properties.cases[date]));
+				}
+				d3.select("#map-plot").select("#colorbar").remove();
+				d3.select("defs").remove();
+				plot_object.makeColorbar(d3.select('#' + svg_element_id), color_scale_cases, [40, 30], [20, d3.select('#' + svg_element_id).node().viewBox.animVal.height - 2*30]);
+			});
 
-		function step() {
-			update(x.invert(currentValue));
-		  currentValue = currentValue + (targetValue/151);
-		  if (currentValue > targetValue) {
-		    moving = false;
-		    currentValue = 0;
-		    clearInterval(timer);
-		    // timer = 0;
-		    playButton.text("Play");
-		    console.log("Slider moving: " + moving);
-		  }
-	}
+			deathButton
+			.on("click", function() {
+				case_b = false;
+				death_b = true;
+				if (!moving) {
+					var date = formatFromSlider(x.invert(currentValue));
+					cantons.style("fill", (d) => color_scale_death(d.properties.deaths[date]));
+				}
+				d3.select("#map-plot").select("#colorbar").remove();
+				d3.select("defs").remove();
+				plot_object.makeColorbar(d3.select('#' + svg_element_id), color_scale_death, [40, 30], [20, d3.select('#' + svg_element_id).node().viewBox.animVal.height - 2*30]);
+			});
 
-		function update(pos) {
-		  handle.attr("cx", x(pos));
-		  label
-		    .attr("x", x(pos))
-		    .text(formatDate(pos));
+			recovButton
+			.on("click", function() {
+				case_b = false;
+				death_b = false;
+				if (!moving) {
+					var date = formatFromSlider(x.invert(currentValue));
+					cantons.style("fill", (d) => color_scale_recov(d.properties.recovs[date]));
+				}
+				d3.select("#map-plot").select("#colorbar").remove();
+				d3.select("defs").remove();
+				plot_object.makeColorbar(d3.select('#' + svg_element_id), color_scale_recov, [40, 30], [20, d3.select('#' + svg_element_id).node().viewBox.animVal.height - 2*30]);
+			});
 
-			var date = formatFromSlider(pos);
+			var case_b = true; //if data is cases
+			var death_b = false; //if data is death
 
-			cantons.style("fill", (d) => color_scale(d.properties.cases[date]));
+			//---------- SLIDER ----------//
+			var dates = Object.keys(cases_data['AG']); //get all dates
+
+			var startDate = new Date(dates[0]);
+			var endDate = new Date(dates[dates.length - 1]);
+
+			var formatDateIntoYear = d3.timeFormat("%d %b");
+			var formatDate = d3.timeFormat("%d %B");
+			var formatFromSlider = d3.timeFormat("%Y-%m-%d")
+
+			var slider_margin = {top:0, right:50, bottom:0, left:50};
+
+			var slider_svg = d3.select('#slider');
+
+			const svg_slider_viewbox = slider_svg.node().viewBox.animVal;
+			const svg_slider_width = svg_slider_viewbox.width - slider_margin.left - slider_margin.right;
+			const svg_slider_height = svg_slider_viewbox.height  - slider_margin.top - slider_margin.bottom;
+
+			var moving = false;
+			var currentValue = 0;
+			var targetValue = svg_slider_width;
+			var timer = 0;
+
+			var playButton = d3.select("#play-button");
+
+			var x = d3.scaleTime()
+			    .domain([startDate, endDate])
+			    .range([0, svg_slider_width])
+			    .clamp(true);
+
+			var slider = slider_svg.append("g")
+			    .attr("class", "slider")
+					.attr("transform", "translate(" + slider_margin.left + "," + svg_slider_height/2 + ")");
+
+					slider.append("line")
+			    .attr("class", "track")
+			    .attr("x1", x.range()[0])
+			    .attr("x2", x.range()[1])
+					.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+			    .attr("class", "track-inset")
+					.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+			    .attr("class", "track-overlay")
+			    .call(d3.drag()
+						.on("start.interrupt", function() { slider.interrupt(); })
+						.on("start drag", function() {
+							currentValue = d3.event.x;
+		        	update(x.invert(currentValue));
+						})
+					);
+
+			slider.insert("g", ".track-overlay")
+			    .attr("class", "ticks")
+			    .attr("transform", "translate(0," + 18 + ")")
+					.selectAll("text")
+			    .data(x.ticks(10))
+			    .enter()
+			    .append("text")
+			    .attr("x", x)
+			    .attr("y", 10)
+			    .attr("text-anchor", "middle")
+			    .text(function(d) { return formatDateIntoYear(d); });
+
+			var label = slider.append("text")
+			    .attr("class", "label")
+			    .attr("text-anchor", "middle")
+			    .text(formatDate(startDate))
+			    .attr("transform", "translate(0," + (-25) + ")")
+
+			var handle = slider.insert("circle", ".track-overlay")
+			    .attr("class", "handle")
+			    .attr("r", 9);
+
+			playButton
+				.on("click", function() {
+					var button = d3.select(this);
+			    if (button.text() == "Pause") {
+			      moving = false;
+			      clearInterval(timer);
+			      // timer = 0;
+			      button.text("Play");
+			    } else {
+			      moving = true;
+			      timer = setInterval(step, 100);
+			      button.text("Pause");
+			    }
+			    console.log("Slider moving: " + moving);
+			  });
+
+			function step() {
+				update(x.invert(currentValue));
+			  currentValue = currentValue + (targetValue/151);
+			  if (currentValue > targetValue) {
+			    moving = false;
+			    currentValue = 0;
+			    clearInterval(timer);
+			    // timer = 0;
+			    playButton.text("Play");
+			    console.log("Slider moving: " + moving);
+			  }
 		}
+
+			function update(pos) {
+			  handle.attr("cx", x(pos));
+			  label
+			    .attr("x", x(pos))
+			    .text(formatDate(pos));
+
+				var date = formatFromSlider(pos);
+
+				if (case_b){
+					cantons.style("fill",(d) => color_scale_cases(d.properties.cases[date]));
+					if (update_tt){
+						tooltip2
+				      .html("Cases: " + current_canton.properties.cases[date] + "<br> Deaths: " + current_canton.properties.deaths[date] + "<br> Recovered: " + current_canton.properties.recovs[date])
+					}
+					//this.makeColorbar(this.svg, color_scale_cases, [50, 30], [20, this.svg_height - 2*30]);
+				} else if (death_b) {
+					cantons.style("fill", (d) => color_scale_death(d.properties.deaths[date]));
+					if (update_tt){
+						tooltip2
+				      .html("Cases: " + current_canton.properties.cases[date] + "<br> Deaths: " + current_canton.properties.deaths[date] + " <br> Recovered: " + current_canton.properties.recovs[date])
+					}
+					//this.makeColorbar(this.svg, color_scale_death, [50, 30], [20, this.svg_height - 2*30]);
+				} else {
+					cantons.style("fill", (d) => color_scale_recov(d.properties.recovs[date]));
+					if (update_tt){
+						tooltip2
+				      .html("Cases: " + current_canton.properties.cases[date] + "<br> Deaths: " + current_canton.properties.deaths[date] + "<br> Recovered: " + current_canton.properties.recovs[date])
+					}
+					//this.makeColorbar(this.svg, color_scale_recov, [50, 30], [20, this.svg_height - 2*30]);
+				}
+			}
 		});
 	}
-
-
 }
 
 function whenDocumentLoaded(action) {
