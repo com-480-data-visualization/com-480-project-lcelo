@@ -1,10 +1,6 @@
 class MapPlot {
 
 	makeColorbar(svg, color_scale, top_left, colorbar_size, scaleClass=d3.scaleLinear) {
-		console.log(svg);
-		console.log(color_scale);
-		console.log(top_left);
-		console.log(colorbar_size);
 
 		const value_to_svg = scaleClass()
 			.domain(color_scale.domain())
@@ -94,8 +90,12 @@ class MapPlot {
 
 		//Get the data
 		const cases_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean.json").then((data) => {
+				return data
+			});
+
+	/*	const cases_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean_densities.json").then((data) => {
 			return data
-		});
+		});*/
 
 		const death_promise = d3.json("data/switzerland/covid19_fatalities_switzerland_openzh_clean.json").then((data) => {
 			return data
@@ -158,10 +158,10 @@ class MapPlot {
 					.style("top", (d3.mouse(this)[1]) + "px")
 			}
 
+			//color_scale.domain([0, 1]);
+
 			var mousemove = function(d) {
-				console.log(d.id);
 				var date = formatFromSlider(x.invert(currentValue));
-				console.log(d3.mouse(this));
 				tooltip2
 				.style("opacity", 1)
 					.html("Cases: " + d.properties.cases[date] + "<br> Deaths: " + d.properties.deaths[date] + "<br> Recovered: " + d.properties.recovs[date])
@@ -177,7 +177,16 @@ class MapPlot {
 				.style("visibility", "hidden")
 			}
 
-			 d3.select("#test").on("mouseleave",mouseout)
+			d3.select("#test").on("mouseleave",mouseout)
+
+			/*this.svg.append("circle").attr("cx",20).attr("cy",50).attr("r", 6).style("fill", "#ffbaba")
+			this.svg.append("circle").attr("cx",20).attr("cy",70).attr("r", 6).style("fill", "#ff7b7b")
+			this.svg.append("circle").attr("cx",20).attr("cy",90).attr("r", 6).style("fill", "#e71414")
+
+
+			this.svg.append("text").attr("x", 40).attr("y", 50).text("Less than 0.6% Infected").style("font-size", "15px").attr("alignment-baseline","middle")
+			this.svg.append("text").attr("x", 40).attr("y", 70).text("Between 0.6 and 0.8% Infected").style("font-size", "15px").attr("alignment-baseline","middle")
+			this.svg.append("text").attr("x", 40).attr("y", 90).text("More than 0.8% infected").style("font-size", "15px").attr("alignment-baseline","middle")*/
 
 			//---------- MAP ----------//
 			this.map_container = this.svg.append('g');
@@ -210,7 +219,7 @@ class MapPlot {
 			var deathButton = d3.select("#death-btn");
 			var recovButton = d3.select("#recov-btn");
 
-			caseButton
+		caseButton
 			.on("click", function() {
 				case_b = true;
 				death_b = false;
