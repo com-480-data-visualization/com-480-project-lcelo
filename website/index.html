@@ -14,7 +14,6 @@
 		<!-- LIB D3JS -->
 		<script src="lib/d3.min.js"></script>
 		<script src="lib/topojson.min.js"></script>
-		<script src="main.js"></script>
 	</head>
 	<body>
 
@@ -46,13 +45,12 @@
 						  How did the virus impact the Swiss population? How is Swiss government handling this crisis?<br>
 							<em>"Our aim is to create awareness" - Jeanne, Etienne and Aslam</em>
 					</p>
-					<a href="#swiss_vs_world" class="button special scrolly">Let's begin</a>
+					<a href="#marimekko" class="button special scrolly">Let's begin</a>
 				</div>
 			</section>
 
-
 				<!-- Switzerland vs the world -->
-				<section id="swiss_vs_world" class="wrapper style4">
+		<!--<section id="swiss_vs_world" class="wrapper style4">
 					<div class="inner">
 						<div>
 							<div class="box2">
@@ -71,10 +69,10 @@
 						</div>
 					</div>
 				</section>
-
+//-->
 
 				<!--  Symptoms (wordcloud)-->
-				<section id="Symptoms" class="wrapper style2">
+				<!--	<section id="Symptoms" class="wrapper style2">
 					<div class="inner">
 						<div>
 							<div class="box">
@@ -92,10 +90,10 @@
 							</div>
 						</div>
 					</div>
-				</section>
+				</section>//-->
 
 				<!--  Comparison with seasonal flu -->
-				<section id="twoOG" class="wrapper style5">
+				<!--	<section id="twoOG" class="wrapper style5">
 					<div class="inner">
 						<div>
 							<div class="box">
@@ -109,23 +107,116 @@
 										<p>#DontTouchYourFace</p>
 									</header>
 									<hr />
-									<p>People that were saying, it's gonna be less than a seasonal flu were wrong.</p>
+									<p>People that were saying, it's gonna be less than a seasonal flu were wrong.</p>//-->
 									<!-- <p>Behind these numbers are real humans.</p> -->
-								</div>
+								<<!--</div>
 							</div>
 						</div>
 					</div>
-				</section>
+				</section>//-->
 
 
 				<!-- Graphs for Switzerland (Hospitalisation stats) -->
-				<section id="twoOG" class="wrapper style2">
+				<section id="marimekko" class="wrapper style3">
 					<div class="inner">
+						<div>
+							<div id="marimekko-div">
+								<svg id="mari-plot" viewBox="0 0 960 500" width="100%"></svg>
+							</div>
+							<div id="mari-time">
+								<svg id="mari_slider" viewBox="0 0 960 100" width="100%">
+									<style>
+									body {
+										font-family:"avenir next", Arial, sans-serif;
+										font-size: 12px;
+										color: #FFFFFF;
+									}
 
-						<div class="image fit">
+									.ticks {
+										font-size: 10px;
+									}
+
+									.track,
+									.track-inset,
+									.track-overlay {
+										stroke-linecap: round;
+									}
+
+									.track {
+										stroke: #000;
+										stroke-opacity: 0.3;
+										stroke-width: 10px;
+									}
+
+									.track-inset {
+										stroke: #ddd;
+										stroke-width: 8px;
+									}
+
+									.track-overlay {
+										pointer-events: stroke;
+										stroke-width: 50px;
+										stroke: transparent;
+										cursor: crosshair;
+									}
+
+									.handle {
+										fill: #fff;
+										stroke: #000;
+										stroke-opacity: 0.5;
+										stroke-width: 1.25px;
+									}
+									</style>
+								</svg>
+							</div>
+							<div id="button_container_mari">
+								<div ><button id="mari-play-button">Play</button></div>
+								<div><button id ="ag-btn">AG</button></div>
+								<div><button id ="ai-btn">AI</button></div>
+								<div><button id ="ar-btn">AR</button></div>
+								<div><button id ="be-btn">BE</button></div>
+								<div><button id ="bl-btn">BL</button></div>
+								<div><button id ="bs-btn">BS</button></div>
+								<div><button id ="fr-btn">FR</button></div>
+								<div><button id ="ge-btn">GE</button></div>
+								<div><button id ="gl-btn">GL</button></div>
+								<div><button id ="gr-btn">GR</button></div>
+								<div><button id ="ju-btn">JU</button></div>
+								<div><button id ="lu-btn">LU</button></div>
+								<div><button id ="ne-btn">NE</button></div>
+								<div><button id ="nw-btn">NW</button></div>
+								<div><button id ="ow-btn">OW</button></div>
+								<div><button id ="sg-btn">SG</button></div>
+								<div><button id ="sh-btn">SH</button></div>
+								<div><button id ="so-btn">SO</button></div>
+								<div><button id ="sz-btn">SZ</button></div>
+								<div><button id ="tg-btn">TG</button></div>
+								<div><button id ="ti-btn">TI</button></div>
+								<div><button id ="ur-btn">UR</button></div>
+								<div><button id ="vd-btn">VD</button></div>
+								<div><button id ="vs-btn">VS</button></div>
+								<div><button id ="zg-btn">ZG</button></div>
+								<div><button id ="zh-btn">ZH</button></div>
+								<style>
+									#button_container_mari{
+										width:100%;
+										text-align: center;
+									}
+									#button_container_mari > div{
+										display: inline-block;
+										margin-left: 0.1cm;
+										margin-right: 0.1cm;
+										vertical-align: middle;
+										border-radius: 1px;
+									}
+								</style>
+							</div>
+						</div>
+
+						<!--<div class="image fit">
 							<img src="images/2.2.jpeg" width="80%" height="80%" alt="" />
 							<img src="images/2.2_2.jpeg" width="80%" height="80%" alt="" />
-						</div>
+						</div>//-->
 
 						<div class="content">
 							<header class="align-center">
@@ -282,6 +373,9 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<script src="marimekko.js"></script>
+			<script src="map.js"></script>
 
 	</body>
 </html>

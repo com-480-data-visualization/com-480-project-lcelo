@@ -318,21 +318,21 @@ class MapPlot {
 					.attr("class", "slider")
 					.attr("transform", "translate(" + slider_margin.left + "," + svg_slider_height/2 + ")");
 
-					slider.append("line")
-					.attr("class", "track")
-					.attr("x1", x.range()[0])
-					.attr("x2", x.range()[1])
-					.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-					.attr("class", "track-inset")
-					.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-					.attr("class", "track-overlay")
-					.call(d3.drag()
-						.on("start.interrupt", function() { slider.interrupt(); })
-						.on("start drag", function() {
-							currentValue = d3.event.x;
-							update(x.invert(currentValue))
-						})
-					);
+			slider.append("line")
+			.attr("class", "track")
+			.attr("x1", x.range()[0])
+			.attr("x2", x.range()[1])
+			.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+			.attr("class", "track-inset")
+			.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+			.attr("class", "track-overlay")
+			.call(d3.drag()
+				.on("start.interrupt", function() { slider.interrupt(); })
+				.on("start drag", function() {
+					currentValue = d3.event.x;
+					update(x.invert(currentValue))
+				})
+			);
 
 			slider.insert("g", ".track-overlay")
 					.attr("class", "ticks")
@@ -385,7 +385,7 @@ class MapPlot {
 					playButton.text("Play");
 					console.log("Slider moving: " + moving);
 				}
-		}
+			}
 
 			function update(pos) {
 				handle.attr("cx", x(pos));
