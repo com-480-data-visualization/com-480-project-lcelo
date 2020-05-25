@@ -67,8 +67,6 @@ class MarimekkoPlot {
 
         const column = node.filter(d => d.depth === 1).filter(d => d.value > 0);
 
-        console.log(column)
-
         column.append("text")
           .attr("x", 3)
           .attr("y", "-1.7em")
@@ -244,7 +242,6 @@ class MarimekkoPlot {
       }
 
       function update_array(array, canton){
-        console.log(array);
         if (array.indexOf(canton) === -1) {
           array.push(canton);
         } else {
@@ -252,158 +249,192 @@ class MarimekkoPlot {
         }
       }
 
+      function change_color(button, color = "forestgreen"){
+        if (button.style("background-color") != color){
+          button.style("background-color", color)
+        } else {
+          button.style("background-color", "#f2f2f2")
+        }
+      }
+
 
       var ag_button = d3.select("#ag-btn");
       ag_button.on("click", function() {
+        change_color(ag_button)
         update_array(active_cantons,"AG")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
       var ai_button = d3.select("#ai-btn");
       ai_button.on("click", function() {
+        change_color(ai_button)
         update_array(active_cantons,"AI")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var ar_button = d3.select("#ar-btn");
       ar_button.on("click", function() {
+        change_color(ar_button)
         update_array(active_cantons,"AR")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var be_button = d3.select("#be-btn");
       be_button.on("click", function() {
+        change_color(be_button)
         update_array(active_cantons,"BE")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var bl_button = d3.select("#bl-btn");
       bl_button.on("click", function() {
+        change_color(bl_button)
         update_array(active_cantons,"BL")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var bs_button = d3.select("#bs-btn");
       bs_button.on("click", function() {
+        change_color(bs_button)
         update_array(active_cantons,"BS")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var fr_button = d3.select("#fr-btn");
       fr_button.on("click", function() {
+        change_color(fr_button)
         update_array(active_cantons,"FR")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var ge_button = d3.select("#ge-btn");
       ge_button.on("click", function() {
+        change_color(ge_button)
         update_array(active_cantons,"GE")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var gl_button = d3.select("#gl-btn");
       gl_button.on("click", function() {
+        change_color(gl_button)
         update_array(active_cantons,"GL")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var gr_button = d3.select("#gr-btn");
       gr_button.on("click", function() {
+        change_color(gr_button)
         update_array(active_cantons,"GR")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var ju_button = d3.select("#ju-btn");
       ju_button.on("click", function() {
+        change_color(ju_button)
         update_array(active_cantons,"JU")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var lu_button = d3.select("#lu-btn");
       lu_button.on("click", function() {
+        change_color(lu_button)
         update_array(active_cantons,"LU")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var ne_button = d3.select("#ne-btn");
       ne_button.on("click", function() {
+        change_color(ne_button)
         update_array(active_cantons,"NE")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var nw_button = d3.select("#nw-btn");
       nw_button.on("click", function() {
+        change_color(nw_button)
         update_array(active_cantons,"NW")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var ow_button = d3.select("#ow-btn");
       ow_button.on("click", function() {
+        change_color(ow_button)
         update_array(active_cantons,"OW")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var sg_button = d3.select("#sg-btn");
       sg_button.on("click", function() {
+        change_color(sg_button)
         update_array(active_cantons,"SG")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var sh_button = d3.select("#sh-btn");
       sh_button.on("click", function() {
+        change_color(sh_button)
         update_array(active_cantons,"SH")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var so_button = d3.select("#so-btn");
       so_button.on("click", function() {
+        change_color(so_button)
         update_array(active_cantons,"SO")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var sz_button = d3.select("#sz-btn");
       sz_button.on("click", function() {
+        change_color(sz_button)
         update_array(active_cantons,"SZ")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var tg_button = d3.select("#tg-btn");
       tg_button.on("click", function() {
+        change_color(tg_button)
         update_array(active_cantons,"TG")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var ti_button = d3.select("#ti-btn");
       ti_button.on("click", function() {
+        change_color(ti_button)
         update_array(active_cantons,"TI")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var ur_button = d3.select("#ur-btn");
       ur_button.on("click", function() {
+        change_color(ur_button)
         update_array(active_cantons,"UR")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var vd_button = d3.select("#vd-btn");
       vd_button.on("click", function() {
+        change_color(vd_button)
         update_array(active_cantons,"VD")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var vs_button = d3.select("#vs-btn");
       vs_button.on("click", function() {
+        change_color(vs_button)
         update_array(active_cantons,"VS")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var zg_button = d3.select("#zg-btn");
       zg_button.on("click", function() {
+        change_color(zg_button)
         update_array(active_cantons,"ZG")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
 
       var zh_button = d3.select("#zh-btn");
       zh_button.on("click", function() {
+        change_color(zh_button,"DarkGreen")
         update_array(active_cantons,"ZH")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
