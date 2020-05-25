@@ -145,44 +145,40 @@
 				<section id="MAP" class="wrapper style3">
 					<div class="inner">
 						<div>
-							<div class="box">
-								<div class="image fit">
-									<!-- <img src="images/pic01.jpg" alt="" /> -->
-									<div id="test">
-										<svg id="map-plot" viewBox="0 0 960 500" width="100%">
-								  		<style>
-									  		.canton {
-									  			stroke: rgb(127, 127, 127);
-									  			stroke-width: 1px;
-									  		}
+							<div id="map_div">
+								<svg id="map-plot" viewBox="0 0 960 500" width="100%">
+									<style>
+										.canton {
+											stroke: rgb(127, 127, 127);
+											stroke-width: 1px;
+										}
 
-									  		.canton-label {
-									  			fill: black;
-									  			text-anchor: middle;
-									  			font-size: 10pt;
-									  		}
+							  		.canton-label {
+							  			fill: black;
+							  			text-anchor: middle;
+							  			font-size: 10pt;
+							  		}
 
-												.tooltip {
-													background-color: black;
-												  border: none;
-												  border-radius: 5px;
-												  padding: 15px;
-												  min-width: 400px;
-												  text-align: left;
-													color: white;
-												}
-											</style>
-										</svg>
-									</div>
-								</div>
-								<div id="line-chart"></div>
-								<div>
+										.tooltip {
+											background-color: black;
+										  border: none;
+										  border-radius: 5px;
+										  padding: 15px;
+										  min-width: 400px;
+										  text-align: left;
+											color: white;
+										}
+									</style>
+								</svg>
+							</div>
+							<div id="line-chart"></div>
+								<div id= time_line>
 									<svg id="slider" viewBox="0 0 960 100" width="100%">
 										<style>
 										body {
 											font-family:"avenir next", Arial, sans-serif;
 											font-size: 12px;
-											color: #696969;
+											color: #FFFFFF;
 										}
 
 								    .ticks {
@@ -221,28 +217,26 @@
 								    }
 										</style>
 									</svg>
-									<button id="play-button">Play</button>
 								</div>
-								<div id="outerr">
-									<div class="innerr"><button id ="case-btn">Cases</button></div>
-									<div class="innerr"><button id ="death-btn">Deaths</button></div>
-									<div class="innerr"><button id ="recov-btn">Recovered</button></div>
+								<div id="button_container">
+									<div ><button id="play-button">Play</button></div>
+									<div><button id ="case-btn">Cases</button></div>
+									<div><button id ="death-btn">Deaths</button></div>
+									<div><button id ="recov-btn">Recovered</button></div>
+									<div><button id ="abs-btn">Absolute</button></div>
+									<div><button id ="rel-btn">Relative</button></div>
 									<style>
-										#outerr{
+										#button_container{
 											width:100%;
 											text-align: center;
-											padding: 10pt
 										}
-										.innerr{
+										#button_container > div{
 											display: inline-block;
 											margin-left: 1cm;
 											margin-right: 1cm;
+											vertical-align: middle;
 										}
 									</style>
-								</div>
-								<div id="outerr">
-									<div class="innerr"><button id ="abs-btn">Absolute</button></div>
-									<div class="innerr"><button id ="rel-btn">Relative</button></div>
 								</div>
 								<div class="content">
 									<header class="align-center">
