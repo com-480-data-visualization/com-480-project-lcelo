@@ -167,6 +167,120 @@ class MapPlot {
 			this.svg.append("text").attr("x", 40).attr("y", 70).text("Between 0.6 and 0.8% Infected").style("font-size", "15px").attr("alignment-baseline","middle")
 			this.svg.append("text").attr("x", 40).attr("y", 90).text("More than 0.8% infected").style("font-size", "15px").attr("alignment-baseline","middle")*/
 
+			//---------- LINE CHART ----------//
+			// set the dimensions and margins of the graph
+			var chart_margin = {top: 5, right: 50, bottom: 20, left: 50};
+
+			// append the svg object to the body of the page
+			var chart = d3.select("#line-chart")
+			.append("svg")
+			.attr("id", "chart-svg")
+			.attr("viewBox", "0 0 960 100")
+			.attr("width", "100%")
+			//.attr("height", height + margin.top + margin.bottom)
+			.append("g")
+			.attr("transform",
+				"translate(" + chart_margin.left + "," + chart_margin.top + ")");
+
+			var chart_svg = d3.select("#chart-svg")
+
+			const svg_chart_viewbox = chart_svg.node().viewBox.animVal;
+			const svg_chart_width = svg_chart_viewbox.width - chart_margin.left - chart_margin.right;
+			const svg_chart_height = svg_chart_viewbox.height  - chart_margin.top - chart_margin.bottom;
+
+			// Add X axis --> it is a date format
+			var x_chart = d3.scaleTime().range([ 0, svg_chart_width]);
+			var xAxis = d3.axisBottom().scale(x_chart);
+			chart.append("g")
+			.attr("class","myXaxis")
+			.attr("transform", "translate(0," + svg_chart_height + ")");
+
+			// Add Y axis
+			var y_chart = d3.scaleLinear().range([svg_chart_height, 0 ]);
+			var yAxis = d3.axisLeft().scale(y_chart).ticks(5);
+			chart.append("g")
+			.attr("class","myYaxis");
+
+			function update_chart_data(data) {
+				// Create the X axis:
+				x_chart.domain(d3.extent(data, function(d) { return new Date(d[0]); }));
+				chart.selectAll(".myXaxis").transition()
+				.duration(300)
+				.call(xAxis);
+
+				// create the Y axis
+			  y_chart.domain([0, d3.max(data, function(d) { return + d[1]; })]);
+			  chart.selectAll(".myYaxis")
+			    .transition()
+			    .duration(300)
+			    .call(yAxis);
+
+				console.log(y_chart.domain()[1]);
+
+			  // Create a update selection: bind to the new data
+			  var u = chart.selectAll(".lineTest")
+			    .data([data], function(d){ return new Date(d[0]) });
+
+			  // Updata the line
+			  u
+			    .enter()
+			    .append("path")
+			    .attr("class","lineTest")
+			    .merge(u)
+			    .transition()
+			    .duration(300)
+			    .attr("d", d3.line()
+						.x(function(d) { return x_chart(new Date(d[0]))})
+						.y(function(d) { return y_chart(d[1]) }))
+			     .attr("fill", "none")
+			     .attr("stroke", "steelblue")
+			     .attr("stroke-width", 1.5)
+					}
+
+			update_chart_data(Object.entries(cases_data["CH"]))
+
+			var focus = chart
+			.append('g')
+			.append('circle')
+      .style("fill", "none")
+      .attr("stroke", "black")
+      .attr('r', 3.5)
+      .style("opacity", 1)
+			.attr("cx", 0)
+			.attr("cy", y_chart(0))
+
+			var focusText = chart
+			.append('g')
+			.append('text')
+      .style("opacity", 1)
+      .attr("text-anchor", "left")
+      .attr("alignment-baseline", "middle")
+			.attr("x", 0 + 7)
+			.attr("y", y_chart(0) - 7)
+			.html(Object.entries(cases_data["CH"])[0][1])
+
+			function updatefocus(pos, data, date, limit, transition){
+				/*focus.transition().duration(1000)
+				focusText.transition().duration(1000)*/
+
+				focusText.html(data["CH"][date])
+				if (transition){
+					focus.transition().duration(300).attr("cx", x_chart(pos)).attr("cy", y_chart(data["CH"][date]))
+					if (x_chart(pos) < limit){
+						focusText.transition().duration(300).attr("x", x_chart(pos) + 7).attr("y", y_chart(data["CH"][date]) - 7)
+					}else{
+						focusText.transition().duration(300).attr("x", x_chart(pos) + 7).attr("y", y_chart(data["CH"][date]) + 7)
+					}
+				} else {
+					focus.attr("cx", x_chart(pos)).attr("cy", y_chart(data["CH"][date]))
+					if (x_chart(pos) < limit){
+						focusText.attr("x", x_chart(pos) + 7).attr("y", y_chart(data["CH"][date]) - 7)
+					}else{
+						focusText.attr("x", x_chart(pos) + 7).attr("y", y_chart(data["CH"][date]) + 7)
+					}
+				}
+			}
+
 			//---------- SLIDER ----------//
 			var dates = Object.keys(cases_data['AG']); //get all dates
 
@@ -213,7 +327,7 @@ class MapPlot {
 						.on("start.interrupt", function() { slider.interrupt(); })
 						.on("start drag", function() {
 							currentValue = d3.event.x;
-							update(x.invert(currentValue));
+							update(x.invert(currentValue))
 						})
 					);
 
@@ -279,18 +393,21 @@ class MapPlot {
 				if (!rel_b){
 					if (case_b){
 						cantons.style("fill",(d) => color_scale_cases(d.properties.cases[date]));
+						updatefocus(pos, cases_data, date, 200, false)
 						if (update_tt){
 							tooltip2
 								.html("Cases: " + current_canton.properties.cases[date] + "<br> Deaths: " + current_canton.properties.deaths[date] + "<br> Recovered: " + current_canton.properties.recovs[date])
 						}
 					} else if (death_b) {
 						cantons.style("fill", (d) => color_scale_death(d.properties.deaths[date]));
+						updatefocus(pos, death_data, date, 200, false)
 						if (update_tt){
 							tooltip2
 								.html("Cases: " + current_canton.properties.cases[date] + "<br> Deaths: " + current_canton.properties.deaths[date] + " <br> Recovered: " + current_canton.properties.recovs[date])
 						}
 					} else {
 						cantons.style("fill", (d) => color_scale_recov(d.properties.recovs[date]));
+						updatefocus(pos, recov_data, date, 200, false)
 						if (update_tt){
 							tooltip2
 								.html("Cases: " + current_canton.properties.cases[date] + "<br> Deaths: " + current_canton.properties.deaths[date] + "<br> Recovered: " + current_canton.properties.recovs[date])
@@ -299,18 +416,21 @@ class MapPlot {
 				} else {
 					if (case_b){
 						cantons.style("fill",(d) => color_scale_cases_d(d.properties.casesD[date]));
+						updatefocus(pos, cases_data, date, 200, false)
 						if (update_tt){
 							tooltip2
 								.html("Cases: " + current_canton.properties.casesD[date] + "% <br> Deaths: " + current_canton.properties.deathsD[date] + "% <br> Recovered: " + current_canton.properties.recovsD[date]+ "%")
 						}
 					} else if (death_b) {
 						cantons.style("fill", (d) => color_scale_death_d(d.properties.deathsD[date]));
+						updatefocus(pos, death_data, date, 200, false)
 						if (update_tt){
 							tooltip2
 								.html("Cases: " + current_canton.properties.casesD[date] + "% <br> Deaths: " + current_canton.properties.deathsD[date] + "% <br> Recovered: " + current_canton.properties.recovsD[date]+ "%")
 						}
 					} else {
 						cantons.style("fill", (d) => color_scale_recov_d(d.properties.recovsD[date]));
+						updatefocus(pos, recov_data, date, 200, false)
 						if (update_tt){
 							tooltip2
 								.html("Cases: " + current_canton.properties.casesD[date] + "% <br> Deaths: " + current_canton.properties.deathsD[date] + "% <br> Recovered: " + current_canton.properties.recovsD[date]+ "%")
@@ -330,6 +450,7 @@ class MapPlot {
 			.append("div")
 	    .style("position", "absolute")
 	    .style("visibility", "hidden")
+			.style("display", "none")
 	    .style("background-color", "white")
 	    .style("border", "solid")
 	    .style("border-width", "1px")
@@ -344,6 +465,7 @@ class MapPlot {
 				tooltip2
 					.style("opacity", 1)
 					.style("visibility", "visible")
+					.style("display", "block")
 					.style("left", (d3.mouse(this)[0]) + "px")
 					.style("top", (d3.mouse(this)[1]) + "px")
 			}
@@ -414,9 +536,14 @@ class MapPlot {
 			.on("click", function() {
 				case_b = true;
 				death_b = false;
+
+				var date = formatFromSlider(x.invert(currentValue));
+
+				update_chart_data(Object.entries(cases_data["CH"]));
+				updatefocus(x.invert(currentValue), cases_data, date, 200, true);
+
 				if (!rel_b){
 					if (!moving) {
-						var date = formatFromSlider(x.invert(currentValue));
 						cantons.style("fill", (d) => color_scale_cases(d.properties.cases[date]));
 					}
 					d3.select("#map-plot").select("#colorbar").remove();
@@ -424,7 +551,6 @@ class MapPlot {
 					plot_object.makeColorbar(d3.select('#' + svg_element_id), color_scale_cases, [40, 30], [20, d3.select('#' + svg_element_id).node().viewBox.animVal.height - 2*30],".0f");
 				} else {
 					if (!moving) {
-						var date = formatFromSlider(x.invert(currentValue));
 						cantons.style("fill", (d) => color_scale_cases_d(d.properties.casesD[date]));
 					}
 					d3.select("#map-plot").select("#colorbar").remove();
@@ -438,9 +564,13 @@ class MapPlot {
 				case_b = false;
 				death_b = true;
 
+				var date = formatFromSlider(x.invert(currentValue));
+
+				update_chart_data(Object.entries(death_data["CH"]))
+				updatefocus(x.invert(currentValue), death_data, date, 200, true);
+
 				if (!rel_b){
 					if (!moving) {
-						var date = formatFromSlider(x.invert(currentValue));
 						cantons.style("fill", (d) => color_scale_death(d.properties.deaths[date]));
 					}
 					d3.select("#map-plot").select("#colorbar").remove();
@@ -448,7 +578,6 @@ class MapPlot {
 					plot_object.makeColorbar(d3.select('#' + svg_element_id), color_scale_death, [40, 30], [20, d3.select('#' + svg_element_id).node().viewBox.animVal.height - 2*30],".0f");
 				} else {
 					if (!moving) {
-						var date = formatFromSlider(x.invert(currentValue));
 						cantons.style("fill", (d) => color_scale_death_d(d.properties.deathsD[date]));
 					}
 					d3.select("#map-plot").select("#colorbar").remove();
@@ -462,9 +591,13 @@ class MapPlot {
 				case_b = false;
 				death_b = false;
 
+				var date = formatFromSlider(x.invert(currentValue));
+
+				update_chart_data(Object.entries(recov_data["CH"]))
+				updatefocus(x.invert(currentValue), recov_data, date, 200, true);
+
 				if (!rel_b){
 					if (!moving) {
-						var date = formatFromSlider(x.invert(currentValue));
 						cantons.style("fill", (d) => color_scale_recov(d.properties.recovs[date]));
 					}
 					d3.select("#map-plot").select("#colorbar").remove();
@@ -472,7 +605,6 @@ class MapPlot {
 					plot_object.makeColorbar(d3.select('#' + svg_element_id), color_scale_recov, [40, 30], [20, d3.select('#' + svg_element_id).node().viewBox.animVal.height - 2*30],".0f");
 				} else {
 					if (!moving) {
-						var date = formatFromSlider(x.invert(currentValue));
 						cantons.style("fill", (d) => color_scale_recov_d(d.properties.recovsD[date]));
 					}
 					d3.select("#map-plot").select("#colorbar").remove();
