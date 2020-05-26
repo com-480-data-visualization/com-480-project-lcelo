@@ -109,7 +109,7 @@ class MarimekkoPlot {
           .text(d => format(d.value));
       }
 
-      update_viz(hosp_data["2020-02-25"]);
+      update_viz(hosp_data["2020-02-26"]);
 
 
       //---------- SLIDER ----------//
@@ -250,6 +250,7 @@ class MarimekkoPlot {
       }
 
       function change_color(button, color = "forestgreen"){
+        console.log(button);
         if (button.style("background-color") != color){
           button.style("background-color", color)
         } else {
