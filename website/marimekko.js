@@ -203,7 +203,7 @@ class MarimekkoPlot {
 						button.text("Play");
 					} else {
 						moving = true;
-						timer = setInterval(step, 100);
+						timer = setInterval(step, 300);
 						button.text("Pause");
 					}
 					console.log("Slider moving: " + moving);
