@@ -16,6 +16,7 @@ class MarimekkoPlot {
 		Promise.all([hosp_promise]).then((results) => {
       let hosp_data = results[0];
 
+      console.log(hosp_data);
       var active_cantons = ["GE", "TI", "VS"];
 
       //---------- MARIMEKKO ----------//
@@ -435,7 +436,7 @@ class MarimekkoPlot {
 
       var zh_button = d3.select("#zh-btn");
       zh_button.on("click", function() {
-        change_color(zh_button,"DarkGreen")
+        change_color(zh_button)
         update_array(active_cantons,"ZH")
         update_viz(hosp_data[formatFromSlider(x.invert(currentValue))])
       });
