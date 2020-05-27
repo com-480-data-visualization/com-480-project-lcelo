@@ -42,16 +42,49 @@
       <section id="banner" data-video="images/banner_k">
          <div class="inner">
             <h1>Covid-19 in Switzerland</h1>
-            <p>This virus changed our way of living. We want to see its impact on Switzerland.<br>
-               How did the virus impact the Swiss population? How is Swiss government handling this crisis?<br>
-               <em>"Our aim is to create awareness" - Jeanne, Etienne and Aslam</em>
-            </p>
-            <a href="#switzerland_map" class="button special scrolly">Let's begin</a>
+						<p>SARS-Cov-2 is a new virus that was discovered in Wuhan (China) late 2019.<br>
+							It belongs to the coronavirus family and gives Covid-19 disease to humans.<br>
+							This disease symptoms are similar to flu but has more complications.<br>
+							Being very virulent and extremely contagious, it's rapidly spreading and leads to thousands of deaths.<br>
+							It's spreading everywhere on Earth and we want to study its impact on Switzerland people and hospitals. <br>
+						</p>
+						<p><em>"We want to show the evolution of this disease in Switzerland." - Jeanne <br>
+							"We want to show the pressure handled by the Swiss hospitals." - Etienne <br>
+							"Not only displaying, our visualisations will allow you to compare canton by canton." - Aslam <br>
+							"Il faut agir aussi vite que possible, mais aussi lentement que nécessaire." - Alain Berset
+						</em> </p>
+
+            <a href="#hospitalisation" class="button special scrolly">Let's begin</a>
          </div>
       </section>
+
+
       <!-- Graphs hospitalisation -->
       <section id="hospitalisation" class="wrapper style3">
          <div class="inner">
+
+					 <!-- Text content -->
+					 <div class="content">
+							<header class="align-center">
+								 <h2>Hospitals statistics</h2>
+								 <p>When someone contracts the virus, he should stay at home. When he has breathing issues or any other symptoms that cannot be handled on his own, he should go to the hospital.
+									 Covid-19 cases that goes to the hospital can be categorized in 3 types: Those in normal ward (Hospitalisation), those in ICU, those under respiratory assistance (Ventilation). <br>
+									 In the graph below, you can select the cantons you want to see in the slice and dice visualisation to see how many people were in hospital on a specific date (with the slider) and their repartition.<br>
+
+									 You can use the play button to see the evolution over time.<br><br>
+
+
+									 If you want to have an overview for all cantons, use the <b>overview</b> toggle button below.
+
+									 </p>
+							</header>
+							<hr />
+							<!-- <p>Here we see the people that are suffering from this disease. Those hospitalised people are either in normal ward, or in ICU, or with a ventilator.</p>
+							<p>Remember that if someone is hospitalised, there's a whole family worried behind.</p> -->
+							<!-- <p>Behind these numbers are real humans.</p> -->
+					 </div>
+
+
             <script>
 							// function for the toggle to display overview graph or normal graph
                function display_overview() {
@@ -66,17 +99,19 @@
 		               overview_cantons.style.display = "block";
 	               }
                }
-
             </script>
-            <div>  OVERVIEW on all cantons</div>
-            <label class="rocker rocker-small" onclick="display_overview()">
-            <input type="checkbox" onclick="display_overview()">
-            <span class="switch-left">Yes</span>
-            <span class="switch-right">No</span>
-            </label>
+						<div id="toggle-button" class="align-center">
+	            <div> <b>  OVERVIEW on all cantons </b></b></div>
+	            <label class="rocker rocker-small" onclick="display_overview()">
+	            <input type="checkbox" onclick="display_overview()">
+	            <span class="switch-left">Yes</span>
+	            <span class="switch-right">No</span>
+	            </label>
+						</div>
+
             <div id="overview_on_all_cantons" style="display:none">
-               <div id="charts">
-                  <svg width="1200" height="500"></svg>
+               <div id="charts" style="text-align: center">
+                  <svg width="1000" height="500"></svg>
                </div>
                <!-- SLIDER -->
                <svg id="overview_slider" viewBox="0 0 960 100" width="100%">
@@ -240,16 +275,7 @@
                   </style>
                </div>
             </div>
-            <div class="content">
-               <header class="align-center">
-                  <h2>Graphs for Switzerland (Hospitalisation stats)</h2>
-                  <p>#KeepSocialDistancing</p>
-               </header>
-               <hr />
-               <p>Here we see the people that are suffering from this disease. Those hospitalised people are either in normal ward, or in ICU, or with a ventilator.</p>
-               <p>Remember that if someone is hospitalised, there's a whole family worried behind.</p>
-               <!-- <p>Behind these numbers are real humans.</p> -->
-            </div>
+
          </div>
          <!-- inner -->
       </section>
@@ -259,10 +285,11 @@
          <div class="inner">
             <div id="map_intro" class="content">
                <header class="align-center">
+								 <hr />
                   <h2>Switzerland Map</h2>
                   <p>This visualisation shows the three key data about COVID-19 on a choropleth map.
                      You are able to navigate between the Cases, Death and Recovered dataset with the buttons under the map.</br>
-                     We offer the posibility for you to choose to display the data in abosulute value or as a percentage of the population.<br>
+                     We offer the posibility for you to choose to display the data in absolute value or as a percentage of the population (ratio).<br>
                      Under the map there is a time serie which shows the cumulative chosen data in Switzerland.<br>
                      You can finally have the evolution of the data over time thanks to the slider under the time serie. You are free to pick a date and
                      inspect the result or click on the Play button to see the progression of the virus over time.
