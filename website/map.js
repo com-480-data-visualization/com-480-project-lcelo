@@ -182,7 +182,7 @@ class MapPlot {
 			.append("svg")
 			.attr("id", "chart-svg")
 			.attr("viewBox", "0 0 960 100")
-			.attr("width", "100%")
+			.attr("width", "90%")
 			//.attr("height", height + margin.top + margin.bottom)
 			.append("g")
 			.attr("transform",
@@ -265,8 +265,6 @@ class MapPlot {
 			.html(Object.entries(cases_data["CH"])[0][1])
 
 			function updatefocus(pos, data, date, limit, transition){
-				/*focus.transition().duration(1000)
-				focusText.transition().duration(1000)*/
 
 				focusText.html(data["CH"][date])
 				if (transition){
@@ -472,7 +470,8 @@ class MapPlot {
 					.style("visibility", "visible")
 					.style("display", "block")
 					.style("left", (d3.mouse(this)[0]) + "px")
-					.style("top", (d3.mouse(this)[1]) + "px")
+					.style("top", (d3.mouse(this)[1]) + d3.select("#map_intro").node().getBoundingClientRect()["height"]+ "px")
+					console.log(d3.mouse(this)[1])
 			}
 
 			var mousemove = function(d) {
@@ -487,7 +486,7 @@ class MapPlot {
 				tooltip2
 				.style("opacity", 1)
 					.style("left", (d3.mouse(this)[0]) + "px")
-					.style("top", (d3.mouse(this)[1]) + "px")
+					.style("top", (d3.mouse(this)[1]) + 225 + "px")
 			}
 
 			var mouseout = function(d) {
@@ -502,6 +501,7 @@ class MapPlot {
 			//---------- MAP ----------//
 			this.map_container = this.svg.append('g');
 			this.label_container = this.svg.append('g');
+			console.log(this.map_container);
 			//draw canton
 			var cantons = this.map_container.selectAll(".canton")
 				.data(map_data)
