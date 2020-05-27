@@ -3186,7 +3186,9 @@
 					.wrapper.style3 input[type="button"].special:hover,
 					.wrapper.style3 button.special:hover,
 					.wrapper.style3 .button.special:hover {
-						background-color: #FF0000;
+						background-color: #DC143C;
+
+						/* background-color: #FF0000; */
 					}
 
 					.wrapper.style3 input[type="submit"].special:active,
@@ -3194,8 +3196,13 @@
 					.wrapper.style3 input[type="button"].special:active,
 					.wrapper.style3 button.special:active,
 					.wrapper.style3 .button.special:active {
-						background-color: #FF6347;
+						background-color: #DC143C;
+						/* background-color: #FF6347; */
 					}
+
+
+
+
 
 			.wrapper.style3 label {
 				color: #ffffff;
