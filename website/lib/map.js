@@ -536,7 +536,7 @@ class MapPlot {
         if (cond) {
           button.style("background-color", color)
         } else {
-          button.style("background-color", "#f2f2f2")
+          button.style("background-color", "#DC143C")
         }
       }
 

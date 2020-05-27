@@ -2,11 +2,6 @@
 @import url(font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Taviraj:300,400,700,300i,400i,700i");
 
-/*
-	Transitive by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
 
 /* Reset */
 
@@ -2952,7 +2947,7 @@
 				.wrapper.style2 input[type="button"].special,
 				.wrapper.style2 button.special,
 				.wrapper.style2 .button.special {
-					background-color: #5AA6ED;
+					background-color: #FFFFFF;
 					color: #ffffff !important;
 				}
 
@@ -3181,7 +3176,8 @@
 				.wrapper.style3 input[type="button"].special,
 				.wrapper.style3 button.special,
 				.wrapper.style3 .button.special {
-					background-color: #5AA6ED;
+					/* COLOR BACKGROUND BUTTON */
+					background-color: #DC143C;
 					color: #ffffff !important;
 				}
 
@@ -3190,7 +3186,7 @@
 					.wrapper.style3 input[type="button"].special:hover,
 					.wrapper.style3 button.special:hover,
 					.wrapper.style3 .button.special:hover {
-						background-color: #71b2f0;
+						background-color: #FF0000;
 					}
 
 					.wrapper.style3 input[type="submit"].special:active,
@@ -3198,7 +3194,7 @@
 					.wrapper.style3 input[type="button"].special:active,
 					.wrapper.style3 button.special:active,
 					.wrapper.style3 .button.special:active {
-						background-color: #439aea;
+						background-color: #FF6347;
 					}
 
 			.wrapper.style3 label {
@@ -4489,3 +4485,6 @@
 		background-position: center;
 		position: relative;
 	}
+
+
+/* BUTTON TEXT COLOR */
