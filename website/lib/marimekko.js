@@ -250,12 +250,16 @@ class MarimekkoPlot {
         }
       }
 
-      function change_color(button, color = "forestgreen"){
+      function change_color(button, color = "#39A9DB"){
         console.log(button);
-        if (button.style("background-color") != color){
-          button.style("background-color", color)
+        console.log('ANDIAMO');
+        console.log(button.style('background-color'));
+        // rgb(57, 169, 219) === #39A9DB
+        if (button.style("background-color") != "rgb(57, 169, 219)"){
+          button.style("background-color", "#39A9DB");
         } else {
-          button.style("background-color", "#DC143C")
+          console.log('salut');
+          button.style("background-color", "#1C77C3");
         }
       }
 

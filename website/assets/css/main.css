@@ -3177,7 +3177,7 @@
 				.wrapper.style3 button.special,
 				.wrapper.style3 .button.special {
 					/* COLOR BACKGROUND BUTTON */
-					background-color: #DC143C;
+					background-color: #1C77C3;
 					color: #ffffff !important;
 				}
 
@@ -3186,7 +3186,7 @@
 					.wrapper.style3 input[type="button"].special:hover,
 					.wrapper.style3 button.special:hover,
 					.wrapper.style3 .button.special:hover {
-						background-color: #DC143C;
+						background-color: #1C77C3;
 
 						/* background-color: #FF0000; */
 					}
@@ -3196,7 +3196,7 @@
 					.wrapper.style3 input[type="button"].special:active,
 					.wrapper.style3 button.special:active,
 					.wrapper.style3 .button.special:active {
-						background-color: #DC143C;
+						background-color: #1C77C3;
 						/* background-color: #FF6347; */
 					}
 

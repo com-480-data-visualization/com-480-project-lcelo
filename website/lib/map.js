@@ -551,11 +551,11 @@ class MapPlot {
 			var abs_button = d3.select("#abs-btn");
 			var rel_button = d3.select("#rel-btn")
 
-			function change_color(button, cond, color = "forestgreen"){
+			function change_color(button, cond, color = "#39A9DB"){
         if (cond) {
-          button.style("background-color", color)
+          button.style("background-color", "#39A9DB")
         } else {
-          button.style("background-color", "#DC143C")
+          button.style("background-color", "#1C77C3")
         }
       }
 
