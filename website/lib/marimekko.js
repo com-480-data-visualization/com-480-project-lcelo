@@ -28,7 +28,7 @@ class MarimekkoPlot {
 
         var data = hosp_data.filter(d => !(active_cantons.indexOf(d.x) === -1));
 
-        var color = d3.scaleOrdinal(d3.schemeSet3).domain(data.map(d => d.y))
+        var color = d3.scaleOrdinal(["#61C9A8","#ED9B40","#BA3B46"]).domain(data.map(d => d.y))
 
         var format = d => d.toLocaleString();
 

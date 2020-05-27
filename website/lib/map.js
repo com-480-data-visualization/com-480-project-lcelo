@@ -80,32 +80,32 @@ class MapPlot {
 		//Six color map, one per data set
 		//Domain where made manually
 		const color_scale_cases = d3.scaleLinear()
-			.range(["rgb(255,255,255)", "rgb(0,0,255)"])
+			.range(["rgb(255,255,255)", "rgb(237, 155, 64)"])
 			.domain([0, 5418])
 			.interpolate(d3.interpolateRgb);
 
 		const color_scale_cases_d = d3.scaleLinear()
-			.range(["rgb(255,255,255)", "rgb(0,0,255)"])
+			.range(["rgb(255,255,255)", "rgb(237, 155, 64)"])
 			.domain([0,1.0246656522783695])
 			.interpolate(d3.interpolateRgb);
 
 		const color_scale_death = d3.scaleLinear()
-			.range(["rgb(255,255,255)", "rgb(255,0,0)"])
+			.range(["rgb(255,255,255)", "rgb(186, 59, 70)"])
 			.domain([0, 401])
 			.interpolate(d3.interpolateRgb);
 
 		const color_scale_death_d = d3.scaleLinear()
-			.range(["rgb(255,255,255)", "rgb(255,0,0)"])
+			.range(["rgb(255,255,255)", "rgb(186, 59, 70)"])
 			.domain([0,0.09735582705756163])
 			.interpolate(d3.interpolateRgb);
 
 		const color_scale_recov = d3.scaleLinear()
-			.range(["rgb(255,255,255)", "rgb(0,255,0)"])
+			.range(["rgb(255,255,255)", "rgb(97, 201, 168)"])
 			.domain([0, 1075])
 			.interpolate(d3.interpolateRgb);
 
 		const color_scale_recov_d = d3.scaleLinear()
-			.range(["rgb(255,255,255)", "rgb(0,255,0)"])
+			.range(["rgb(255,255,255)", "rgb(97,201,168)"])
 			.domain([0,0.4573185952930134])
 			.interpolate(d3.interpolateRgb);
 
@@ -226,7 +226,7 @@ class MapPlot {
 			  // Update the line
 			  line.enter()
 			    .append("path")
-			    .attr("class",".line")
+			    .attr("class","line")
 			    .merge(line)
 			    .transition()
 			    .duration(300)
