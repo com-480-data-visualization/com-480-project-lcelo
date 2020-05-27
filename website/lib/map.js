@@ -1,5 +1,6 @@
 class MapPlot {
 
+	//To make the gradient scale
 	makeColorbar(svg, color_scale, top_left, colorbar_size, format) {
 
 		const scaleClass=d3.scaleLinear;
@@ -59,25 +60,25 @@ class MapPlot {
 	constructor(svg_element_id) {
 		this.svg = d3.select('#' + svg_element_id);
 
-		// may be useful for calculating scales
+		//Get the svg dimensions
 		const svg_viewbox = this.svg.node().viewBox.animVal;
 		this.svg_width = svg_viewbox.width;
 		this.svg_height = svg_viewbox.height;
 
-		// D3 Projection
-		// similar to scales
+		//projection for the map
 		const projection = d3.geoNaturalEarth1()
 			.rotate([0, 0])
-			.center([8.3, 46.8]) // WorldSpace: Latitude and longitude of center of switzerland
+			.center([8.3, 46.8]) //Latitude and longitude of center of switzerland
 			.scale(13000)
-			.translate([this.svg_width / 2, this.svg_height / 2]) // SVG space
+			.translate([this.svg_width / 2, this.svg_height / 2])
 			.precision(.1);
 
-		// path generator to convert JSON to SVG paths
+		// path generator for the cantons
 		const path_generator = d3.geoPath()
 			.projection(projection);
 
-		//Three color map, one per category
+		//Six color map, one per data set
+		//Domain where made manually
 		const color_scale_cases = d3.scaleLinear()
 			.range(["rgb(255,255,255)", "rgb(0,0,255)"])
 			.domain([0, 5418])
@@ -108,12 +109,12 @@ class MapPlot {
 			.domain([0,0.4573185952930134])
 			.interpolate(d3.interpolateRgb);
 
-		//Get the data
+		//Get the data-sets
 		const cases_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean.json").then((data) => {
 				return data
 			});
 
-	const cases_densities_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean_densities.json").then((data) => {
+		const cases_densities_promise = d3.json("data/switzerland/covid19_cases_switzerland_openzh_clean_densities.json").then((data) => {
 			return data
 		});
 
@@ -148,8 +149,6 @@ class MapPlot {
 			let recov_data_d = results[5];
 			let map_data = results[6];
 
-			console.log(recov_data_d);
-
 			//add the data as a property of the canton
 			map_data.forEach(canton => {
 				canton.properties.cases = cases_data[canton.id];
@@ -160,15 +159,7 @@ class MapPlot {
 				canton.properties.recovsD = recov_data_d[canton.id];
 			});
 
-			/*this.svg.append("circle").attr("cx",20).attr("cy",50).attr("r", 6).style("fill", "#ffbaba")
-			this.svg.append("circle").attr("cx",20).attr("cy",70).attr("r", 6).style("fill", "#ff7b7b")
-			this.svg.append("circle").attr("cx",20).attr("cy",90).attr("r", 6).style("fill", "#e71414")
-
-
-			this.svg.append("text").attr("x", 40).attr("y", 50).text("Less than 0.6% Infected").style("font-size", "15px").attr("alignment-baseline","middle")
-			this.svg.append("text").attr("x", 40).attr("y", 70).text("Between 0.6 and 0.8% Infected").style("font-size", "15px").attr("alignment-baseline","middle")
-			this.svg.append("text").attr("x", 40).attr("y", 90).text("More than 0.8% infected").style("font-size", "15px").attr("alignment-baseline","middle")*/
-
+			// We need three binary variable for the buttons
 			var case_b = true; //if data is cases
 			var death_b = false; //if data is death
 			var rel_b = false; //if relative data
@@ -177,60 +168,66 @@ class MapPlot {
 			// set the dimensions and margins of the graph
 			var chart_margin = {top: 5, right: 50, bottom: 20, left: 50};
 
-			// append the svg object to the body of the page
+			// apppend a svg
 			var chart = d3.select("#line-chart")
 			.append("svg")
 			.attr("id", "chart-svg")
 			.attr("viewBox", "0 0 960 100")
 			.attr("width", "90%")
-			//.attr("height", height + margin.top + margin.bottom)
 			.append("g")
 			.attr("transform",
 				"translate(" + chart_margin.left + "," + chart_margin.top + ")");
 
 			var chart_svg = d3.select("#chart-svg")
 
+			//get dimension of the svg
 			const svg_chart_viewbox = chart_svg.node().viewBox.animVal;
 			const svg_chart_width = svg_chart_viewbox.width - chart_margin.left - chart_margin.right;
 			const svg_chart_height = svg_chart_viewbox.height  - chart_margin.top - chart_margin.bottom;
 
-			// Add X axis --> it is a date format
+			//horizontal axis and scale
 			var x_chart = d3.scaleTime().range([ 0, svg_chart_width]);
-			var xAxis = d3.axisBottom().scale(x_chart);
+			var x_chart_axis = d3.axisBottom().scale(x_chart);
 			chart.append("g")
-			.attr("class","myXaxis")
+			.attr("class","x_axis")
 			.attr("transform", "translate(0," + svg_chart_height + ")");
 
-			// Add Y axis
+			//vertical axis and scale
 			var y_chart = d3.scaleLinear().range([svg_chart_height, 0 ]);
-			var yAxis = d3.axisLeft().scale(y_chart).ticks(5);
+			var y_chart_axis = d3.axisLeft().scale(y_chart).ticks(5);
 			chart.append("g")
-			.attr("class","myYaxis");
+			.attr("class","y_axis");
 
+			/**
+			* Update the chart.
+			*
+			* Function used when we change data-set or date to update the chart vizualisation.
+			*
+			* @param {Object}	data	The data set to use for the chart
+			*/
 			function update_chart_data(data) {
-				// Create the X axis:
+				// Create the horizontal axis with call():
 				x_chart.domain(d3.extent(data, function(d) { return new Date(d[0]); }));
-				chart.selectAll(".myXaxis").transition()
+				chart.selectAll(".x_axis").transition()
 				.duration(300)
-				.call(xAxis);
+				.call(x_chart_axis);
 
-				// create the Y axis
+				// Create the vertical axis with call():
 			  y_chart.domain([0, d3.max(data, function(d) { return + d[1]; })]);
-			  chart.selectAll(".myYaxis")
+			  chart.selectAll(".y_axis")
 			    .transition()
 			    .duration(300)
-			    .call(yAxis);
+			    .call(y_chart_axis);
 
-			  // Create a update selection: bind to the new data
-			  var u = chart.selectAll(".lineTest")
+			  // Create the line
+			  var line = chart.selectAll("line")
 			    .data([data], function(d){ return new Date(d[0]) });
 
-			  // Updata the line
-			  u
-			    .enter()
+			  // Update the line
+			  line.enter()
 			    .append("path")
-			    .attr("class","lineTest")
-			    .merge(u)
+			    .attr("class","lin")
+			    .merge(line)
 			    .transition()
 			    .duration(300)
 			    .attr("d", d3.line()
@@ -239,46 +236,68 @@ class MapPlot {
 			     .attr("fill", "none")
 			     .attr("stroke", "steelblue")
 			     .attr("stroke-width", 1.5)
-					}
+			}
 
+			//call the fucntion created with defalut dataset
 			update_chart_data(Object.entries(cases_data["CH"]))
 
+			//create the circle on the line
 			var focus = chart
-			.append('g')
-			.append('circle')
-      .style("fill", "none")
-      .attr("stroke", "CurrentColor")
-      .attr('r', 3.5)
-      .style("opacity", 1)
-			.attr("cx", 0)
-			.attr("cy", y_chart(0))
+				.append('g')
+				.append('circle')
+	      .style("fill", "none")
+	      .attr("stroke", "CurrentColor")
+	      .attr('r', 3.5)
+	      .style("opacity", 1)
+				.attr("cx", 0)
+				.attr("cy", y_chart(0))
 
+			//create the text next to the the "focus" circle
 			var focusText = chart
-			.append('g')
-			.append('text')
-      .style("opacity", 1)
-			.attr("fill", "CurrentColor")
-      .attr("text-anchor", "left")
-      .attr("alignment-baseline", "middle")
-			.attr("x", 0 + 7)
-			.attr("y", y_chart(0) - 7)
-			.html(Object.entries(cases_data["CH"])[0][1])
+				.append('g')
+				.append('text')
+	      .style("opacity", 1)
+				.attr("fill", "CurrentColor")
+	      .attr("text-anchor", "left")
+	      .attr("alignment-baseline", "middle")
+				.attr("x", 0 + 7)
+				.attr("y", y_chart(0) - 7)
+				.html(Object.entries(cases_data["CH"])[0][1])
 
+			/**
+			* Update the focus
+			*
+			* Function used when we need to update the focus when changing the data-set or slider.
+			*
+			* @param {Number}	pos	position of the slider
+			* @param {Object}	data data-set
+			* @param {String} date  date on which the focus should be
+			* @param {Number}	limit limit used to know when to change the position of the text (above or below the line)
+			* @param {Boolean}	transition if there should be a transtion or not
+			*
+			*/
 			function updatefocus(pos, data, date, limit, transition){
 
-				focusText.html(data["CH"][date])
+				focusText.html(data["CH"][date]) //update text
+
 				if (transition){
+					//we have clicked in a button
 					focus.transition().duration(300).attr("cx", x_chart(pos)).attr("cy", y_chart(data["CH"][date]))
 					if (x_chart(pos) < limit){
+						//above curve
 						focusText.transition().duration(300).attr("x", x_chart(pos) + 7).attr("y", y_chart(data["CH"][date]) - 7)
 					}else{
+						//below curve
 						focusText.transition().duration(300).attr("x", x_chart(pos) + 7).attr("y", y_chart(data["CH"][date]) + 7)
 					}
 				} else {
+					//slider has moved
 					focus.attr("cx", x_chart(pos)).attr("cy", y_chart(data["CH"][date]))
 					if (x_chart(pos) < limit){
+						//above curve
 						focusText.attr("x", x_chart(pos) + 7).attr("y", y_chart(data["CH"][date]) - 7)
 					}else{
+						//below curve
 						focusText.attr("x", x_chart(pos) + 7).attr("y", y_chart(data["CH"][date]) + 7)
 					}
 				}
