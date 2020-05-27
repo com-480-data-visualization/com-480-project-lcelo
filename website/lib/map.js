@@ -173,7 +173,7 @@ class MapPlot {
 			.append("svg")
 			.attr("id", "chart-svg")
 			.attr("viewBox", "0 0 960 100")
-			.attr("width", "90%")
+			.attr("width", "70%")
 			.append("g")
 			.attr("transform",
 				"translate(" + chart_margin.left + "," + chart_margin.top + ")");
@@ -220,13 +220,13 @@ class MapPlot {
 			    .call(y_chart_axis);
 
 			  // Create the line
-			  var line = chart.selectAll("line")
+			  var line = chart.selectAll(".line")
 			    .data([data], function(d){ return new Date(d[0]) });
 
 			  // Update the line
 			  line.enter()
 			    .append("path")
-			    .attr("class","lin")
+			    .attr("class",".line")
 			    .merge(line)
 			    .transition()
 			    .duration(300)
@@ -488,7 +488,7 @@ class MapPlot {
 					.style("opacity", 1)
 					.style("visibility", "visible")
 					.style("display", "block")
-					.style("left", (d3.mouse(this)[0]) + "px")
+					.style("left", (d3.mouse(this)[0]) + (d3.select("#map_div").node().getBoundingClientRect()["width"] - d3.select("#map-plot").node().getBoundingClientRect()["width"])/2 + "px")
 					.style("top", (d3.mouse(this)[1]) + d3.select("#map_intro").node().getBoundingClientRect()["height"]+ "px")
 					console.log(d3.mouse(this)[1])
 			}
@@ -504,8 +504,8 @@ class MapPlot {
 
 				tooltip2
 				.style("opacity", 1)
-					.style("left", (d3.mouse(this)[0]) + "px")
-					.style("top", (d3.mouse(this)[1]) + 225 + "px")
+					.style("left", (d3.mouse(this)[0]) + (d3.select("#map_div").node().getBoundingClientRect()["width"] - d3.select("#map-plot").node().getBoundingClientRect()["width"])/2 + "px")
+					.style("top", (d3.mouse(this)[1]) + d3.select("#map_intro").node().getBoundingClientRect()["height"] + "px")
 			}
 
 			var mouseout = function(d) {
