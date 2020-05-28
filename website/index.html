@@ -144,12 +144,12 @@
                   </svg>
                </div>
                <div id="button_container">
-                  <div ><button id="play-button" class = "separator">Play</button></div>
-                  <div><button id ="case-btn"style = "background-color: #39A9DB" class="button special scrolly">Cases</button></div>
-                  <div><button id ="death-btn"  class="button special scrolly">Deaths</button></div>
-                  <div><button id ="recov-btn" class = "separator button special scrolly">Recovered</button></div>
-                  <div><button id ="abs-btn" style = "background-color: #39A9DB" class="button special scrolly">Absolute</button></div>
-                  <div><button id ="rel-btn" class="button special scrolly">Relative</button></div>
+                  <div><button id="play-button" class = "separator">Play</button></div>
+                  <div><button id ="case-btn" style = "background-color: #39A9DB; color: rgb(255,255,255) !important" >Cases</button></div>
+                  <div><button id ="death-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">Deaths</button></div>
+                  <div><button id ="recov-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">Recovered</button></div>
+                  <div><button id ="abs-btn" style = "background-color: #39A9DB; color: rgb(255,255,255) !important">Absolute</button></div>
+                  <div><button id ="rel-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">Relative</button></div>
                   <style>
                      #button_container{
                      width:100%;
@@ -160,6 +160,9 @@
                      padding-left: 0.5cm;
                      padding-right: 0.5cm;
                      vertical-align: middle;
+                     }
+                     #button_container > div > button {
+                       color: rgb(255,255,255);
                      }
                      .separator{
                      margin-right: 2cm;
@@ -346,36 +349,36 @@
                <div id="button_container_mari">
                   <div><button id="mari-play-button" class = "separator">Play</button></div>
                   <div>
+                    <!-- the style inside the buttons is a bit messy but it's the only way to overite the framework-->
                     <div>
-                      <button id ="ag-btn" class="button special scrolly">AG</button>
-                      <button id ="ai-btn" class="button special scrolly">AI</button>
-                      <button id ="ar-btn" class="button special scrolly">AR</button>
-                      <button id ="be-btn" class="button special scrolly">BE</button>
-                      <button id ="bl-btn" class="button special scrolly">BL</button>
-                      <button id ="bs-btn" class="button special scrolly">BS</button>
-                  <button id ="fr-btn" class="button special scrolly">FR</button>
-                  <button id ="ge-btn" class="button special scrolly" style = "background-color: #39A9DB">GE</button>
-                  <button id ="gl-btn" class="button special scrolly">GL</button>
-                  <button id ="gr-btn" class="button special scrolly">GR</button>
-                  <button id ="ju-btn" class="button special scrolly">JU</button>
-                  <button id ="lu-btn" class="button special scrolly">LU</button>
-                  <button id ="ne-btn" class="button special scrolly">NE</button>
-                </div>
-                  <div>
-                    <button id ="nw-btn" class="button special scrolly">NW</button>
-                  <button id ="ow-btn" class="button special scrolly">OW</button>
-                  <button id ="sg-btn" class="button special scrolly">SG</button>
-                  <button id ="sh-btn" class="button special scrolly">SH</button>
-                  <button id ="so-btn" class="button special scrolly">SO</button>
-                  <button id ="sz-btn" class="button special scrolly">SZ</button>
-                  <button id ="tg-btn" class="button special scrolly">TG</button>
-                  <button id ="ti-btn" class="button special scrolly" style = "background-color: #39A9DB">TI</button>
-                  <button id ="ur-btn" class="button special scrolly">UR</button>
-                  <button id ="vd-btn" class="button special scrolly">VD</button>
-                  <button id ="vs-btn" class="button special scrolly" style = "background-color: #39A9DB">VS</button>
-                  <button id ="zg-btn" class="button special scrolly">ZG</button>
-                  <button id ="zh-btn" class="button special scrolly">ZH</button>
-                </div>
+                      <button id ="ag-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">AG</button>
+                      <button id ="ai-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">AI</button>
+                      <button id ="ar-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">AR</button>
+                      <button id ="be-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">BE</button>
+                      <button id ="bl-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">BL</button>
+                      <button id ="bs-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">BS</button>
+                      <button id ="fr-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">FR</button>
+                      <button id ="ge-btn" style = "background-color: #39A9DB; color: rgb(255,255,255) !important">GE</button>
+                      <button id ="gl-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">GL</button>
+                      <button id ="gr-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">GR</button>
+                      <button id ="ju-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">JU</button>
+                      <button id ="lu-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">LU</button>
+                      <button id ="ne-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">NE</button>
+                    </div>
+                    <div>
+                      <button id ="nw-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">NW</button>
+                      <button id ="ow-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">SG</button>
+                      <button id ="sh-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">SH</button>
+                      <button id ="so-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">SO</button>
+                      <button id ="sz-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">SZ</button>
+                      <button id ="tg-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">TG</button>
+                      <button id ="ti-btn" style = "background-color: #39A9DB; color: rgb(255,255,255) !important">TI</button>
+                      <button id ="ur-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">UR</button>
+                      <button id ="vd-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">VD</button>
+                      <button id ="vs-btn" style = "background-color: #39A9DB; color: rgb(255,255,255) !important">VS</button>
+                      <button id ="zg-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">ZG</button>
+                      <button id ="zh-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">ZH</button>
+                    </div>
                   <style>
                      #button_container_mari{
                      width:100%;
