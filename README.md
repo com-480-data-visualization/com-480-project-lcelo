@@ -34,7 +34,7 @@ The repository is composed of 4 folders:
       - *marimekko.js* for the hospital data with canton selection
       - *bar_chart.js* for the hospital data with overview of all cantons
     
-You can see the results of our work the [Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/).
+You can see the results of our work [here](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/).
 
 All data is hosted on github and we used [GiHub pages](https://pages.github.com) to host the website.
 
