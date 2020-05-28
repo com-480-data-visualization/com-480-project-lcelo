@@ -21,7 +21,7 @@
       <script src="assets/js/main.js"></script>
 
       <!-- SCRIPT -->
-      <script src='scriptsbar_chart.js'></script>
+      <script src='scripts/bar_chart.js'></script>
       <script src="scripts/marimekko.js"></script>
       <script src="scripts/map.js"></script>
 
@@ -185,7 +185,8 @@
 
 					 <!-- Text content -->
 					 <div id = "hosp_intro" class="content">
-							<header class="align-center">
+							<header class="align-center" style="padding-left:1em; padding-right:1em">
+								<hr />
 								 <h2>Hospitals statistics</h2>
 								 <p>When someone contracts the virus, he should stay at home. When he has breathing issues or any other symptoms that cannot be handled on his own, he should go to the hospital.
 									 Covid-19 cases that goes to the hospital can be categorized in 3 types: Those in normal ward (Hospitalisation), those in ICU, those under respiratory assistance (Ventilation). <br>
@@ -198,7 +199,7 @@
 
 									 </p>
 							</header>
-							<hr />
+
 							<!-- <p>Here we see the people that are suffering from this disease. Those hospitalised people are either in normal ward, or in ICU, or with a ventilator.</p>
 							<p>Remember that if someone is hospitalised, there's a whole family worried behind.</p> -->
 							<!-- <p>Behind these numbers are real humans.</p> -->
@@ -222,16 +223,17 @@
             </script>
 						<div id="toggle-button" class="align-center">
 
-	            <div> <b>  OVERVIEW on all cantons </b><br><br></div>
+	            <div> _________________<br><br> <b>  OVERVIEW on all cantons </b><br><br> </div>
 							<label class="switch" onclick="display_overview()">
 							  <input type="checkbox" unchecked onclick="display_overview()">
 							  <span class="slider round"></span>
 							</label>
+							
 						</div>
 
-            <div id="overview_on_all_cantons" style="display:none">
+            <div id="overview_on_all_cantons" style="display:none;padding-left:1em;padding-right:1em">
               <div id="stackbar_chart" style="text-align: center">
-                  <svg id="overview_svg" viewBox="0 0 960 500" width="70%"></svg>
+                  <svg id="overview_svg" viewBox="0 0 960 500" width="70%" ></svg>
                </div>
                <!-- SLIDER -->
 							 <div style = "text-align: center">
@@ -403,7 +405,7 @@
                   </style>
                </div>
             </div>
-
+						<hr />
          </div>
          <!-- inner -->
       </section>
