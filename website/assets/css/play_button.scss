@@ -1,0 +1,105 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800);
+
+$background:#dc143b;
+$foreground:#ffffff;
+
+$foreground-light:#34495e;
+
+
+$size:50px;
+$ratio:1.2;
+
+$transition-time:0.3s;
+
+body {
+  background: $background;
+  font-family: 'Open Sans', sans-serif;
+  text-align:center;
+}
+
+.play {
+  display:block;
+  width: 0;
+	height: 0;
+	border-top: $size solid transparent;
+	border-bottom: $size solid transparent;
+	border-left: ($size*$ratio) solid $foreground;
+  margin: ($size * 2) auto $size auto;
+  position:relative;
+  z-index:1;
+  transition: all $transition-time;
+  -webkit-transition: all $transition-time;
+  -moz-transition: all $transition-time;
+  left:($size*0.2);
+
+  &:before {
+    content:'';
+    position:absolute;
+    top:($size*-1.5);
+    left:($size*-2.3);
+    bottom:($size*-1.5);
+    right:($size*-0.7);
+    border-radius:50%;
+    border: ($size*0.2) solid $foreground;
+    z-index:2;
+    transition: all $transition-time;
+    -webkit-transition: all $transition-time;
+    -moz-transition: all $transition-time;
+  }
+  &:after {
+    content:'';
+    opacity:0;
+    transition: opacity ($transition-time * 2);
+    -webkit-transition: opacity ($transition-time * 2);
+    -moz-transition: opacity ($transition-time * 2);
+  }
+
+  &:hover, &:focus {
+    &:before {
+       transform: scale(1.1);
+       -webkit-transform: scale(1.1);
+       -moz-transform: scale(1.1);
+    }
+  }
+
+  &.active {
+	  border-color:transparent;
+    &:after {
+      content:'';
+      opacity:1;
+      width:($size);
+      height:($size*1.6);
+      background:$foreground;
+      position:absolute;
+      right: ($size*0.1);
+      top: ($size*-0.8);
+      border-left:($size*0.4) solid $foreground;
+      box-shadow:inset ($size*0.6) 0 0 0 $background;
+    }
+  }
+}
+
+h1 {
+   text-transform:uppercase;
+  color:$foreground-light;
+  letter-spacing:2px;
+  font-size:2em;
+  margin-bottom:0;
+}
+
+.headline {
+   display:block;
+  color:$foreground;
+  font-size:1.5em;
+  margin-bottom:1.5em;
+}
+
+.social {
+  text-decoration:none;
+  color:$foreground-light;
+  margin: 0.5em 1.5em;
+  display:inline-block;
+  &:hover, &:focus {
+    color:$foreground;
+  }
+}

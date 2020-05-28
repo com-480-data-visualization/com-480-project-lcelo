@@ -144,10 +144,10 @@
                </div>
                <div id="button_container">
                   <div ><button id="play-button" class = "separator">Play</button></div>
-                  <div><button id ="case-btn"style = "background-color: forestgreen" class="button special scrolly">Cases</button></div>
+                  <div><button id ="case-btn"style = "background-color: #39A9DB" class="button special scrolly">Cases</button></div>
                   <div><button id ="death-btn"  class="button special scrolly">Deaths</button></div>
                   <div><button id ="recov-btn" class = "separator button special scrolly">Recovered</button></div>
-                  <div><button id ="abs-btn" style = "background-color: forestgreen" class="button special scrolly">Absolute</button></div>
+                  <div><button id ="abs-btn" style = "background-color: #39A9DB" class="button special scrolly">Absolute</button></div>
                   <div><button id ="rel-btn" class="button special scrolly">Relative</button></div>
                   <style>
                      #button_container{
@@ -344,39 +344,48 @@
                </div>
                <div id="button_container_mari">
                   <div><button id="mari-play-button" class = "separator">Play</button></div>
-                  <div><button id ="ag-btn" class="button special scrolly">AG</button></div>
-                  <div><button id ="ai-btn" class="button special scrolly">AI</button></div>
-                  <div><button id ="ar-btn" class="button special scrolly">AR</button></div>
-                  <div><button id ="be-btn" class="button special scrolly">BE</button></div>
-                  <div><button id ="bl-btn" class="button special scrolly">BL</button></div>
-                  <div><button id ="bs-btn" class="button special scrolly">BS</button></div>
-                  <div><button id ="fr-btn" class="button special scrolly">FR</button></div>
-                  <div><button id ="ge-btn" class="button special scrolly" style = "background-color: forestgreen">GE</button></div>
-                  <div><button id ="gl-btn" class="button special scrolly">GL</button></div>
-                  <div><button id ="gr-btn" class="button special scrolly">GR</button></div>
-                  <div><button id ="ju-btn" class="button special scrolly">JU</button></div>
-                  <div><button id ="lu-btn" class="button special scrolly">LU</button></div>
-                  <div><button id ="ne-btn" class="button special scrolly">NE</button></div>
-                  <div><button id ="nw-btn" class="button special scrolly">NW</button></div>
-                  <div><button id ="ow-btn" class="button special scrolly">OW</button></div>
-                  <div><button id ="sg-btn" class="button special scrolly">SG</button></div>
-                  <div><button id ="sh-btn" class="button special scrolly">SH</button></div>
-                  <div><button id ="so-btn" class="button special scrolly">SO</button></div>
-                  <div><button id ="sz-btn" class="button special scrolly">SZ</button></div>
-                  <div><button id ="tg-btn" class="button special scrolly">TG</button></div>
-                  <div><button id ="ti-btn" class="button special scrolly" style = "background-color: forestgreen">TI</button></div>
-                  <div><button id ="ur-btn" class="button special scrolly">UR</button></div>
-                  <div><button id ="vd-btn" class="button special scrolly">VD</button></div>
-                  <div><button id ="vs-btn" class="button special scrolly" style = "background-color: forestgreen">VS</button></div>
-                  <div><button id ="zg-btn" class="button special scrolly">ZG</button></div>
-                  <div><button id ="zh-btn" class="button special scrolly">ZH</button></div>
+                  <div>
+                    <div>
+                      <button id ="ag-btn" class="button special scrolly">AG</button>
+                      <button id ="ai-btn" class="button special scrolly">AI</button>
+                      <button id ="ar-btn" class="button special scrolly">AR</button>
+                      <button id ="be-btn" class="button special scrolly">BE</button>
+                      <button id ="bl-btn" class="button special scrolly">BL</button>
+                      <button id ="bs-btn" class="button special scrolly">BS</button>
+                  <button id ="fr-btn" class="button special scrolly">FR</button>
+                  <button id ="ge-btn" class="button special scrolly" style = "background-color: #39A9DB">GE</button>
+                  <button id ="gl-btn" class="button special scrolly">GL</button>
+                  <button id ="gr-btn" class="button special scrolly">GR</button>
+                  <button id ="ju-btn" class="button special scrolly">JU</button>
+                  <button id ="lu-btn" class="button special scrolly">LU</button>
+                  <button id ="ne-btn" class="button special scrolly">NE</button>
+                </div>
+                  <div>
+                    <button id ="nw-btn" class="button special scrolly">NW</button>
+                  <button id ="ow-btn" class="button special scrolly">OW</button>
+                  <button id ="sg-btn" class="button special scrolly">SG</button>
+                  <button id ="sh-btn" class="button special scrolly">SH</button>
+                  <button id ="so-btn" class="button special scrolly">SO</button>
+                  <button id ="sz-btn" class="button special scrolly">SZ</button>
+                  <button id ="tg-btn" class="button special scrolly">TG</button>
+                  <button id ="ti-btn" class="button special scrolly" style = "background-color: #39A9DB">TI</button>
+                  <button id ="ur-btn" class="button special scrolly">UR</button>
+                  <button id ="vd-btn" class="button special scrolly">VD</button>
+                  <button id ="vs-btn" class="button special scrolly" style = "background-color: #39A9DB">VS</button>
+                  <button id ="zg-btn" class="button special scrolly">ZG</button>
+                  <button id ="zh-btn" class="button special scrolly">ZH</button>
+                </div>
                   <style>
                      #button_container_mari{
                      width:100%;
                      text-align: center;
                      }
+
                      #button_container_mari > div{
                      display: inline-block;
+                     }
+
+                     #button_container_mari > div > div{
                      margin-left: 0.05cm;
                      margin-right: 0.05cm;
                      margin-top: 0.05cm;
@@ -384,6 +393,13 @@
                      vertical-align: middle;
                      border-radius: 1px;
                      }
+
+                     #button_container_mari > div > div button{
+                     border-radius: 4px;
+                     padding-left: 1em;
+                     padding-right: 1em;
+                     }
+
                      .separator{
                      margin-right: 2cm;
                      }

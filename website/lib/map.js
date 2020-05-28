@@ -590,11 +590,11 @@ class MapPlot {
 			* @param {String} color  the color to set
 			*
 			*/
-			function change_color(button, cond, color = "forestgreen"){
+			function change_color(button, cond, color = "#39A9DB"){
         if (cond) {
           button.style("background-color", color)
         } else {
-          button.style("background-color", "#DC143C")
+          button.style("background-color", "#1C77C3")
         }
       }
 
