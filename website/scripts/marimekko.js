@@ -219,6 +219,12 @@ class MarimekkoPlot {
 					}
 				});
 
+      /**
+			* Advance the slider circle by one step.
+			*
+			* Called with SetTimer().
+			*
+			*/
 			function step() {
 				update(x.invert(currentValue));
 				currentValue = currentValue + (targetValue/151);
@@ -232,6 +238,14 @@ class MarimekkoPlot {
 				}
 			}
 
+      /**
+			* Update the map with the right data.
+			*
+			* Called when the slider moves.
+			*
+			@param {Number} pos the position of the slider
+			*
+			*/
       function update(pos) {
 				handle.attr("cx", x(pos));
 				label
@@ -243,6 +257,16 @@ class MarimekkoPlot {
       }
 
       //---------- BUTTONS ----------//
+
+      /**
+			* Remove item from array.
+			*
+			* remove value if present in arr.
+			*
+			@param {Array} arr the position of the slider
+      @param {String} value the value to remove
+			*
+			*/
       function removeItemOnce(arr, value) {
           var index = arr.indexOf(value);
           if (index > -1) {
@@ -251,6 +275,15 @@ class MarimekkoPlot {
           return arr;
       }
 
+      /**
+			* Update array with canton
+			*
+			* Add canton if not present, remove it if present.
+			*
+			@param {Array} arrray the position of the slider
+      @param {String} canton the value to remove
+			*
+			*/
       function update_array(array, canton){
         if (array.indexOf(canton) === -1) {
           array.push(canton);
@@ -259,6 +292,15 @@ class MarimekkoPlot {
         }
       }
 
+      /**
+			* Change the button color.
+			*
+			* This function change the button color if necessary
+			*
+			* @param {button}	Object	button to change the color
+			* @param {String} color  the color to set
+			*
+			*/
       function change_color(button, color = "#39A9DB"){
         if (button.style("background-color") != "rgb(57, 169, 219)"){
           button.style("background-color", "#39A9DB");
