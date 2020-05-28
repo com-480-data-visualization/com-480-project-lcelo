@@ -19,7 +19,7 @@ function createChartLegend(mainDiv, group) {
         $("#Legend_" + mainDivName).append("<span class='team-graph team1' style='display: inline-block; margin-right:10px;'>\
         <span style='background:" + cloloCode +
             ";width: 10px;height: 10px;display: inline-block;vertical-align: middle;'>&nbsp;</span>\
-        <span style='padding-top: 0;font-family:FontAwesome, sans-serif;font-size: 13px;display: inline;'>" + d +
+        <span style='padding-top: 0; sans-serif;font-size: 13px;display: inline;'>" + d +
             " </span>\
       </span>");
     });
@@ -393,7 +393,6 @@ data_hospitalisation_promise.then(function(data_hospitalisation)  {
 
     // hover
     var rectTooltipg = svg.append("g")
-        .attr("font-family", "FontAwesome")
         .attr("font-size", 10)
         .attr("text-anchor", "end")
         .attr("id", "recttooltip_" + mainDivName)
@@ -418,9 +417,6 @@ data_hospitalisation_promise.then(function(data_hospitalisation)  {
         })
         .style("font-size", function(d) {
             return 10;
-        })
-        .style("font-family", function(d) {
-            return "FontAwesome";
         })
         .text(function(d, i) {
             return "";
