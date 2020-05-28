@@ -17,12 +17,12 @@
 The goal of this project is to show the impact of COVID-19 in Switzerland. <br>
 This work has been done for the EPFL course **Data Visualization (COM-480)**.
 
-We used [D3.js](https://d3js.org) for our vizualisations. 
+We used [D3.js](https://d3js.org) for our vizualisations.
 
 The repository is composed of 4 folders:
 
   - **data** This folder holds the original data-set [covid19-cases-switzerland-master](https://github.com/daenuprobst/covid19-cases-switzerland) from Daniel Probst. You can also find our main jupyter notebook  *data_cleaning* used to clean/format the data for our vizualisations.
-  - **docs** This folder contains our report for the 2nd and 3rd Milestone. The most interesting one is the [Process Book](docs/LCELO_milestone3_dataviz.pdf) for Milestone 3.
+  - **docs** This folder contains our report for the 2nd and 3rd Milestone. The most interesting one is the [Process Book](docs/LCELO_process_book.pdf) for Milestone 3.
   - **pre-processing** This folder contains the jupyter notebook and text for Milestone1.
   - **website** In this folder you will find all the code related to the website. *index.html* is the html of the website. There are also 6 sub folders:
     - assets: contains the code from the framework we used for the website design
@@ -33,7 +33,7 @@ The repository is composed of 4 folders:
       - *map.js* for the Switerland Map
       - *marimekko.js* for the hospital data with canton selection
       - *bar_chart.js* for the hospital data with overview of all cantons
-    
+
 You can see the results of our work [here](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/).
 
 All data is hosted on github and we used [GiHub pages](https://pages.github.com) to host the website.
