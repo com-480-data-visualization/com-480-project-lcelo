@@ -77,11 +77,6 @@ data_hospitalisation_promise.then(function(data_hospitalisation)  {
       .attr("class", "slider")
       .attr("transform", "translate(" + slider_margin.left + "," + svg_slider_height/2 + ")");
 
-
-  var slider = slider_svg.append("g")
-      .attr("class", "slider")
-      .attr("transform", "translate(" + slider_margin.left + "," + svg_slider_height/2 + ")");
-
   slider.append("line")
   .attr("class", "track")
   .attr("x1", x.range()[0])
@@ -195,8 +190,7 @@ data_hospitalisation_promise.then(function(data_hospitalisation)  {
     // to update the chart
     svg.selectAll("g").remove()
 
-    // D3 js v4 uses scaleBand instead the normal scale
-    //
+    // D3 js v4 uses scaleBand instead the normal scale on D3js v3
     var x = d3.scaleBand()
         .rangeRound([margin.left, width - margin.right])
         .padding(0.1);
