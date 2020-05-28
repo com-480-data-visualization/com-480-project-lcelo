@@ -405,15 +405,15 @@ function custom_color(d){
             .offset(d3.stackOffsetDiverging)
             (data_hospitalisation_selected);
 
-        var svg = d3.select("svg"),
+        var svg = d3.select("#overview_svg"),
             margin = {
                 top: 20,
                 right: 30,
                 bottom: 60,
                 left: 60
             },
-            width = +svg.attr("width"),
-            height = +svg.attr("height");
+            width = svg.node().viewBox.animVal.width,
+            height = svg.node().viewBox.animVal.height;
 
         svg.selectAll("g").remove()
 
