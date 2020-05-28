@@ -7,22 +7,24 @@
       <link rel="stylesheet" href="assets/css/main.css" />
       <link rel="stylesheet" href="assets/css/switch.css" />
 
-      <!-- LIB D3JS -->
+      <!-- LIB-->
       <script src="lib/d3.min.js"></script>
       <script src="lib/topojson.min.js"></script>
+      <script src="lib/jqery-1.11.1.min.js"></script>
 
-      <!-- bar chart js file -->
-      <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-      <script src='lib/bar_chart.js'></script>
-      <!-- Scripts -->
+      <!-- FRAMEWORK-->
       <script src="assets/js/jquery.min.js"></script>
       <script src="assets/js/jquery.scrolly.min.js"></script>
       <script src="assets/js/jquery.scrollex.min.js"></script>
       <script src="assets/js/skel.min.js"></script>
       <script src="assets/js/util.js"></script>
       <script src="assets/js/main.js"></script>
-      <script src="lib/marimekko.js"></script>
-      <script src="lib/map.js"></script>
+
+      <!-- SCRIPT -->
+      <script src='scriptsbar_chart.js'></script>
+      <script src="scripts/marimekko.js"></script>
+      <script src="scripts/map.js"></script>
+
    </head>
    <body>
 
@@ -63,7 +65,7 @@
 
       <!-- Switzerland map -->
       <section id="switzerland_map" class="wrapper style3">
-         <div class="inner">
+         <div class="inner" style = "background-color : rgba(0,0,0,0.7)">
             <div id="map_intro" class="content">
                <header class="align-center">
 								 <hr />
@@ -144,6 +146,7 @@
                   </svg>
                </div>
                <div id="button_container">
+                 <!-- the style inside the buttons is a bit messy but it's the only way to overite the framework-->
                   <div><button id="play-button" class = "separator">Play</button></div>
                   <div><button id ="case-btn" style = "background-color: #39A9DB; color: rgb(255,255,255) !important" >Cases</button></div>
                   <div><button id ="death-btn" style = "background-color: #1C77C3; color: rgb(255,255,255) !important">Deaths</button></div>
@@ -178,7 +181,7 @@
 
       <!-- Graphs hospitalisation -->
       <section id="hospitalisation" class="wrapper style3">
-         <div class="inner">
+         <div class="inner" style = "background-color : rgba(0,0,0,0.7)">
 
 					 <!-- Text content -->
 					 <div id = "hosp_intro" class="content">
@@ -227,7 +230,7 @@
 						</div>
 
             <div id="overview_on_all_cantons" style="display:none">
-               <div id="charts" style="text-align: center">
+              <div id="stackbar_chart" style="text-align: center">
                   <svg id="overview_svg" viewBox="0 0 960 500" width="70%"></svg>
                </div>
                <!-- SLIDER -->

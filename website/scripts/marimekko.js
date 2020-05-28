@@ -16,7 +16,7 @@ class MarimekkoPlot {
 		Promise.all([hosp_promise]).then((results) => {
       let hosp_data = results[0];
 
-      console.log(hosp_data);
+      //list canton from which to display the data
       var active_cantons = ["GE", "TI", "VS"];
 
       //---------- MARIMEKKO ----------//
@@ -24,14 +24,24 @@ class MarimekkoPlot {
       width = this.svg_width,
       height = this.svg_height;
 
+      /**
+			* Update the vizualisation
+			*
+			* Function used when we need to update the vizualiaztion (new canton to display or slider moves).
+			*
+			* @param {Objects}	hosp_data	the dataset
+			* @param {Object}	svg the svg on which to draw
+			*
+			*/
       function update_viz(hosp_data, svg=d3.select('#mari-plot')){
 
-        var data = hosp_data.filter(d => !(active_cantons.indexOf(d.x) === -1));
+        var data = hosp_data.filter(d => !(active_cantons.indexOf(d.x) === -1)); //get only the data for active cantons
 
-        var color = d3.scaleOrdinal(["#61C9A8","#ED9B40","#BA3B46"]).domain(data.map(d => d.y))
+        var color = d3.scaleOrdinal(["#61C9A8","#ED9B40","#BA3B46"]).domain(data.map(d => d.y)) //each category has a color
 
         var format = d => d.toLocaleString();
 
+        // create a tree with all the data for each canton
         var treemap = data => d3.treemap()
             .round(true)
             .tile(d3.treemapSliceDice)
@@ -57,16 +67,14 @@ class MarimekkoPlot {
 
         const root = treemap(data);
 
-        //svg.style("font", "10px sans-serif");
-
-        svg.selectAll("g").remove()
+        svg.selectAll("g").remove() //remove previous viz to update
 
         const node = svg.selectAll("g")
         .data(root.descendants())
         .join("g")
         .attr("transform", d => `translate(${d.x0},${d.y0})`);
 
-        const column = node.filter(d => d.depth === 1).filter(d => d.value > 0);
+        const column = node.filter(d => d.depth === 1).filter(d => d.value > 0); //get canton
 
         column.append("text")
           .attr("x", 3)
@@ -90,7 +98,7 @@ class MarimekkoPlot {
           .attr("fill", "CurrentColor")
           .attr("stroke", "#000")
 
-        const cell = node.filter(d => d.depth === 2).filter(d => d.value > 0);
+        const cell = node.filter(d => d.depth === 2).filter(d => d.value > 0); //get data for each canton
 
         cell.append("rect")
           .attr("fill", d => color(d.data.key))
@@ -110,7 +118,7 @@ class MarimekkoPlot {
           .text(d => format(d.value));
       }
 
-      update_viz(hosp_data["2020-02-26"]);
+      update_viz(hosp_data["2020-02-26"]);  //initial vizualization
 
 
       //---------- SLIDER ----------//
@@ -120,9 +128,9 @@ class MarimekkoPlot {
 			var startDate = new Date(dates[0]);
 			var endDate = new Date(dates[dates.length - 1]);
 
-			var formatDateIntoYear = d3.timeFormat("%d %b");
-			var formatDate = d3.timeFormat("%d %B");
-			var formatFromSlider = d3.timeFormat("%Y-%m-%d")
+			var formatDateIntoYear = d3.timeFormat("%d %b"); // day mon.
+			var formatDate = d3.timeFormat("%d %B"); //day Month
+			var formatFromSlider = d3.timeFormat("%Y-%m-%d") ////Year-mon.-day
 
 			var slider_margin = {top:0, right:50, bottom:0, left:50};
 
@@ -132,8 +140,8 @@ class MarimekkoPlot {
 			const svg_slider_width = svg_slider_viewbox.width - slider_margin.left - slider_margin.right;
 			const svg_slider_height = svg_slider_viewbox.height  - slider_margin.top - slider_margin.bottom;
 
-      var moving = false;
-			var currentValue = 0;
+      var moving_b = false; //if slider is moving
+			var currentValue = 0; //slider value
 			var targetValue = svg_slider_width;
 			var timer = 0;
 
@@ -153,6 +161,7 @@ class MarimekkoPlot {
           .attr("class", "slider")
           .attr("transform", "translate(" + slider_margin.left + "," + svg_slider_height/2 + ")");
 
+      // slider line
       slider.append("line")
       .attr("class", "track")
       .attr("x1", x.range()[0])
@@ -182,6 +191,7 @@ class MarimekkoPlot {
 					.attr("text-anchor", "middle")
 					.text(function(d) { return formatDateIntoYear(d); });
 
+      //text slider
 			var label = slider.append("text")
 					.attr("class", "label")
 					.attr("text-anchor", "middle")
@@ -189,6 +199,7 @@ class MarimekkoPlot {
           .attr("fill", "CurrentColor")
 					.attr("transform", "translate(0," + (-25) + ")")
 
+      //circle slider
 			var handle = slider.insert("circle", ".track-overlay")
 					.attr("class", "handle")
 					.attr("r", 9);
@@ -197,29 +208,27 @@ class MarimekkoPlot {
 				.on("click", function() {
 					var button = d3.select(this);
 					if (button.text() == "Pause") {
-						moving = false;
+						moving_b = false;
 						clearInterval(timer);
 						// timer = 0;
 						button.text("Play");
 					} else {
-						moving = true;
-						timer = setInterval(step, 300);
+						moving_b = true;
+						timer = setInterval(step, 300); //call step() each 300ms
 						button.text("Pause");
 					}
-					console.log("Slider moving: " + moving);
 				});
 
 			function step() {
 				update(x.invert(currentValue));
 				currentValue = currentValue + (targetValue/151);
 				if (currentValue > targetValue) {
-					moving = false;
+					moving_b = false;
 					currentValue = 0;
 					update(x.invert(currentValue));
 					clearInterval(timer);
 					// timer = 0;
 					playButton.text("Play");
-					console.log("Slider moving: " + moving);
 				}
 			}
 
@@ -251,12 +260,9 @@ class MarimekkoPlot {
       }
 
       function change_color(button, color = "#39A9DB"){
-        console.log(button);
-        // rgb(57, 169, 219) === #39A9DB
         if (button.style("background-color") != "rgb(57, 169, 219)"){
           button.style("background-color", "#39A9DB");
         } else {
-          console.log('salut');
           button.style("background-color", "#1C77C3");
         }
       }

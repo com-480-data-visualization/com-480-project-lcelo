@@ -325,7 +325,7 @@ class MapPlot {
 			const svg_slider_width = svg_slider_viewbox.width - slider_margin.left - slider_margin.right;
 			const svg_slider_height = svg_slider_viewbox.height  - slider_margin.top - slider_margin.bottom;
 
-			var moving_b = false; //if slider is moving_b
+			var moving_b = false; //if slider is moving
 			var currentValue = 0; //slider value
 			var targetValue = svg_slider_width;
 			var timer = 0;
@@ -390,11 +390,10 @@ class MapPlot {
 					if (button.text() == "Pause") {
 						moving_b = false;
 						clearInterval(timer);
-						// timer = 0;
 						button.text("Play");
 					} else {
 						moving_b = true;
-						timer = setInterval(step, 100); //call step each 100ms
+						timer = setInterval(step, 100); //call step() each 100ms
 						button.text("Pause");
 					}
 				});
