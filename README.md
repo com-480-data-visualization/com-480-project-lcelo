@@ -1,4 +1,4 @@
-# Project of Data Visualization (COM-480)
+# Project of Data Vizualization (COM-480)
 
 [Guidelines](https://com-480-data-visualization.github.io/2020-project-guidelines/)
 
@@ -15,7 +15,7 @@
 **80% of the final grade**
 
 The goal of this project is to show the impact of COVID-19 in Switzerland. <br>
-This work has been done for the EPFL course **Data Visualization (COM-480)**.
+This work has been done for the EPFL course **Data Vizualization (COM-480)**.
 
 We used [D3.js](https://d3js.org) for our vizualisations. 
 
@@ -26,10 +26,10 @@ The repository is composed of 4 folders:
   - **pre-processing** This folder contains the jupyter notebook and text for Milestone1.
   - **website** In this folder you will find all the code related to the website. *index.html* is the html of the website. There are also 6 sub folders:
     - assets: contains the code from the framework we used for the website design
-    - bubble_cloud: old folder form a visualization we decided not to include
-    - data: the actual data used for the visualization, generate from *data_cleaning*
+    - bubble_cloud: old folder form a vizualization we decided not to include
+    - data: the actual data used for the vizualization, generate from *data_cleaning*
     - lib: the code for the libraries we used, Jquery, D3 and TopoJson.
-    - scripts: the code we wrote for our visualizations, this includes:
+    - scripts: the code we wrote for our vizualizations, this includes:
       - *map.js* for the Switerland Map
       - *marimekko.js* for the hospital data with canton selection
       - *bar_chart.js* for the hospital data with overview of all cantons
@@ -55,7 +55,7 @@ Our datasets (this might be updated with further dataset):
 Data has been produced to be quickly usable so it has been well cleaned even if sometimes we can feel the lack of data and inconsistency over columns (not all rows contains all features).
 
 
-We would also like to use APIs to provide real-time data (as much as possible) for some of the visualizations:
+We would also like to use APIs to provide real-time data (as much as possible) for some of the vizualizations:
 1. API per country: https://rapidapi.com/collection/coronavirus-covid-19
 2. API (35$ a month or web scraping):  https://www.worldometers.info/coronavirus/
 
@@ -65,9 +65,9 @@ We would also like to use APIs to provide real-time data (as much as possible) f
 COVID-19, SARS-Cov-2, Coronavirus are probably the most used words for the last few months and will be the hot topic for this beginning of 2020.
 This new virus was discovered in Wuhan (China) in late 2019. It belongs to the coronavirus family and gives COVID-19 disease to humans. These disease symptoms are similar to flu but have more complications (eg. pneumonia). Being very virulent and extremely contagious, it's rapidly spreading and leads to thousands of deaths since hospitals are not able to provide respiratory support for needy patients. Since it's unknown to any human's immunity system, we need to contain the spreading to avoid deaths due to the lack of hospital equipment.
 
-This course aims to learn to visualize. It's not only about the visualizations but also how to use them in a relevant manner to provide insights. We're all concerned by this virus Sars-Cov-2, and we are taking this opportunity to learn more about the impact of this virus on our world.
+This course aims to learn to vizualize. It's not only about the vizualizations but also how to use them in a relevant manner to provide insights. We're all concerned by this virus Sars-Cov-2, and we are taking this opportunity to learn more about the impact of this virus on our world.
 
-Our ambition is to implement a platform where you can observe the virus spread in the world over time. Not only providing numbers, but our goal is also to use interactive data visualization techniques to allow the user to "feel" the data.
+Our ambition is to implement a platform where you can observe the virus spread in the world over time. Not only providing numbers, but our goal is also to use interactive data vizualization techniques to allow the user to "feel" the data.
 
 By "feel", we mean:
 - raise consciousness about the virus, its dangerousness (symptoms/risk factors), prevention
