@@ -36,7 +36,7 @@ The repository is composed of 4 folders:
     
 You can see the results of our work the [Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/).
 
-All data is hosted on github and we used [GiHhub pages] to host the website.
+All data is hosted on github and we used [GiHub pages](https://pages.github.com) to host the website.
 
 ## Milestone 1 (Friday 3rd April, 5pm)
 
