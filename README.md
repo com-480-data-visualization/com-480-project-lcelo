@@ -17,11 +17,11 @@
 The goal of this project is to show the impact of COVID-19 in Switzerland. <br>
 This work has been done for the EPFL course **Data Visualization (COM-480)**.
 
-We used [D3.js](https://d3js.org) for our vizualisations.
+We used [D3.js](https://d3js.org) for our visualizations.
 
 The repository is composed of 4 folders:
 
-  - **data** This folder holds the original data-set [covid19-cases-switzerland-master](https://github.com/daenuprobst/covid19-cases-switzerland) from Daniel Probst. You can also find our main jupyter notebook  *data_cleaning* used to clean/format the data for our vizualisations.
+  - **data** This folder holds the original data-set [covid19-cases-switzerland-master](https://github.com/daenuprobst/covid19-cases-switzerland) from Daniel Probst. You can also find our main jupyter notebook  *data_cleaning* used to clean/format the data for our visualizations.
   - **docs** This folder contains our report for the 2nd and 3rd Milestone. The most interesting one is the [Process Book](docs/LCELO_process_book.pdf) for Milestone 3.
   - **pre-processing** This folder contains the jupyter notebook and text for Milestone1.
   - **website** In this folder you will find all the code related to the website. *index.html* is the html of the website. There are also 6 sub folders:
@@ -32,17 +32,17 @@ The repository is composed of 4 folders:
     - scripts: the code we wrote for our visualizations, this includes:
       - *map.js* for the Switerland Map
       - *marimekko.js* for the hospital data with canton selection
-      - *bar_chart.js* for the hospital data with overview of all cantons
+      - *bar_chart.js* for the hospital data with an overview of all cantons
 
-You can have a look at the [website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/) containing our work. Or just click [here](https://www.youtube.com/watch?v=LV-gm_FiaRs&feature=youtu.be) to see the screen cast of the website with some explanations.
+You can have a look at the [website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/) containing our work. Or just click [here](https://www.youtube.com/watch?v=LV-gm_FiaRs&feature=youtu.be) to see the screencast of the website with some explanations.
 
 There are two sections in the website, one for the map and one for the hospitalization data.
-- **Map** You are able to choose the data to display with the three buttons *Cases*, *Deaths* and *Recovered*. You can display data in absolute value  with the *Absolute* button or as a percentage of the canton population with the button *Relative*.
-There is a slider to choose a date to display the data. You can also press the *Play/Pause* button to see the evolution goes by itself. By moving you mouse over a canton you are able to see the three categories at once.
-- **Hospital** This section has two visualizations, you are able to change between them by clicking on the *Overview* toggle button. The visualisation by default shows the hospitalization data for the selected canton. It is a marimekko plot where you can see the repartition of the three categories of hospitalization(normal,ICU,ventilation) and the width of the canton represents the total number of cases in the canton, the wider the rectangle the more hospitalization there are.<br>
-When you click on the *Overview* button you get a visualization where all hospitalization data for all cantons is displayed. Like this we can have a better understanding of the situation. Note that the data is in absolute value. YOu can interact with the visualization by moving your mouse over a bart to have the numbers. As in the map there is a slider to choose a date to display the data. You can also press the *Play/Pause* button to see the evolution goes by itself.
+- **Map** You can choose the data to display with the three buttons *Cases*, *Deaths* and *Recovered*. You can display data in absolute value  with the *Absolute* button or as a percentage of the canton population with the button *Relative*.
+There is a slider to choose a date to display the data. You can also press the *Play/Pause* button to see the evolution goes by itself. By moving your mouse over a canton you are able to see the three categories at once.
+- **Hospital** This section has two visualizations, you are able to change between them by clicking on the *Overview* toggle button. The visualization by default shows the hospitalization data for the selected canton. It is a Marimekko plot where you can see the repartition of the three categories of hospitalization(normal,ICU,ventilation) and the width of the canton represents the total number of cases in the canton, the wider the rectangle the more hospitalization there is.<br>
+When you click on the *Overview* button you get a visualization where all hospitalization data for all cantons is displayed. Like this, we can have a better understanding of the situation. Note that the data is in absolute value. You can interact with the visualization by moving your mouse over a bar to have the numbers. As in the map, there is a slider to choose a date to display the data. You can also press the *Play/Pause* button to see the evolution goes by itself.
 
-All data is hosted on github and we used [GitHub pages](https://pages.github.com) to host the website.
+All data is hosted on GitHub and we used [GitHub pages](https://pages.github.com) to host the website.
 
 If you want to run the website locally:
 - make sure to have python3
