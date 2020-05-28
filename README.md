@@ -1,15 +1,6 @@
-# Milestone 3
-
-[Milestone 3 Report](docs/LCELO_milestone3_dataviz.pdf)
-
-[Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/)
-
-
 # Project of Data Visualization (COM-480)
 
 [Guidelines](https://com-480-data-visualization.github.io/2020-project-guidelines/)
-
-[Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/)
 
 | Student's name | SCIPER |
 | -------------- | ------ |
@@ -18,6 +9,34 @@
 | Aslam CADER | 294112 |
 
 [Milestone 1](#milestone-1-friday-3rd-april-5pm) • [Milestone 2](#milestone-2-friday-1st-may-5pm) • [Milestone 3](#milestone-3-thursday-28th-may-5pm)
+
+## Milestone 3 (Thursday 28th May, 5pm)
+
+**80% of the final grade**
+
+The goal of this project is to show the impact of COVID-19 in Switzerland. <br>
+This work has been done for the EPFL course **Data Visualization (COM-480)**.
+
+We used [D3.js](https://d3js.org) for our vizualisations. 
+
+The repository is composed of 4 folders:
+
+  - **data** This folder holds the original data-set [covid19-cases-switzerland-master](https://github.com/daenuprobst/covid19-cases-switzerland) from Daniel Probst. You can also find our main jupyter notebook  *data_cleaning* used to clean/format the data for our vizualisations.
+  - **docs** This folder contains our report for the 2nd and 3rd Milestone. The most interesting one is the [Process Book](docs/LCELO_milestone3_dataviz.pdf) for Milestone 3.
+  - **pre-processing** This folder contains the jupyter notebook and text for Milestone1.
+  - **website** In this folder you will find all the code related to the website. *index.html* is the html of the website. There are also 6 sub folders:
+    - assets: contains the code from the framework we used for the website design
+    - bubble_cloud: old folder form a visualization we decided not to include
+    - data: the actual data used for the visualization, generate from *data_cleaning*
+    - lib: the code for the libraries we used, Jquery, D3 and TopoJson.
+    - scripts: the code we wrote for our visualizations, this includes:
+      - *map.js* for the Switerland Map
+      - *marimekko.js* for the hospital data with canton selection
+      - *bar_chart.js* for the hospital data with overview of all cantons
+    
+You can see the results of our work the [Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/).
+
+All data is hosted on github and we used [GiHhub pages] to host the website.
 
 ## Milestone 1 (Friday 3rd April, 5pm)
 
@@ -119,15 +138,5 @@ __What source of inspiration do you take? Visualizations that you found on other
 **10% of the final grade**
 
 [Milestone 2 Report describing the goal of the project](docs/LCELO_milestone2_dataviz.pdf)
-
-[Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/)
-
-
-
-## Milestone 3 (Thursday 28th May, 5pm)
-
-**80% of the final grade**
-
-[Milestone 3 Report](docs/LCELO_milestone3_dataviz.pdf)
 
 [Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/)
