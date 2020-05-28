@@ -34,7 +34,7 @@ The repository is composed of 4 folders:
       - *marimekko.js* for the hospital data with canton selection
       - *bar_chart.js* for the hospital data with overview of all cantons
 
-You can have a look at the [website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/) containing our work. Or just click [here](youtube.com) to see the screen cast of the website with some explanations.
+You can have a look at the [website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/) containing our work. Or just click [here](https://www.youtube.com/watch?v=LV-gm_FiaRs&feature=youtu.be) to see the screen cast of the website with some explanations.
 
 There are two sections in the website, one for the map and one for the hospitalization data.
 - **Map** You are able to choose the data to display with the three buttons *Cases*, *Deaths* and *Recovered*. You can display data in absolute value  with the *Absolute* button or as a percentage of the canton population with the button *Relative*.
@@ -42,10 +42,15 @@ There is a slider to choose a date to display the data. You can also press the *
 - **Hospital** This section has two visualizations, you are able to change between them by clicking on the *Overview* toggle button. The visualisation by default shows the hospitalization data for the selected canton. It is a marimekko plot where you can see the repartition of the three categories of hospitalization(normal,ICU,ventilation) and the width of the canton represents the total number of cases in the canton, the wider the rectangle the more hospitalization there are.<br>
 When you click on the *Overview* button you get a visualization where all hospitalization data for all cantons is displayed. Like this we can have a better understanding of the situation. Note that the data is in absolute value. YOu can interact with the visualization by moving your mouse over a bart to have the numbers. As in the map there is a slider to choose a date to display the data. You can also press the *Play/Pause* button to see the evolution goes by itself.
 
-- **Hospital** This section has two visualizations, you are able to change between them by clicking on the *Overview* toggle button. The visualisation by default shows the hospitalization data for the selected canton. It is a marimekko plot where you can see the repartition of the three categories of hospitalization(normal,ICU,ventilation) and the width of the canton represents the total number of cases in the canton, the wider the rectangle the more hospitalization there are.
-
-
 All data is hosted on github and we used [GitHub pages](https://pages.github.com) to host the website.
+
+If you want to run the website locally:
+- make sure to have python3
+- clone the repo
+- navigate to the folder with the `cd` command
+- run `python3 -m http.server` 
+- go to http://0.0.0.0:8000 and click **website**
+- enjoy :)
 
 ## Milestone 1 (Friday 3rd April, 5pm)
 
