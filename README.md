@@ -1,5 +1,11 @@
-# Project of Data Visualization (COM-480)
+# Milestone 3
 
+[Milestone 3 Report](docs/LCELO_milestone3_dataviz.pdf)
+
+[Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/)
+
+
+# Project of Data Visualization (COM-480)
 
 [Guidelines](https://com-480-data-visualization.github.io/2020-project-guidelines/)
 
@@ -121,3 +127,7 @@ __What source of inspiration do you take? Visualizations that you found on other
 ## Milestone 3 (Thursday 28th May, 5pm)
 
 **80% of the final grade**
+
+[Milestone 3 Report](docs/LCELO_milestone3_dataviz.pdf)
+
+[Website](https://com-480-data-visualization.github.io/com-480-project-lcelo/website/)
