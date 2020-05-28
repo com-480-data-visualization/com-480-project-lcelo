@@ -1,4 +1,4 @@
-# Project of Data Vizualization (COM-480)
+# Project of Data Visualization (COM-480)
 
 [Guidelines](https://com-480-data-visualization.github.io/2020-project-guidelines/)
 
@@ -15,21 +15,21 @@
 **80% of the final grade**
 
 The goal of this project is to show the impact of COVID-19 in Switzerland. <br>
-This work has been done for the EPFL course **Data Vizualization (COM-480)**.
+This work has been done for the EPFL course **Data Visualization (COM-480)**.
 
-We used [D3.js](https://d3js.org) for our vizualisations. 
+We used [D3.js](https://d3js.org) for our visualizations. 
 
 The repository is composed of 4 folders:
 
-  - **data** This folder holds the original data-set [covid19-cases-switzerland-master](https://github.com/daenuprobst/covid19-cases-switzerland) from Daniel Probst. You can also find our main jupyter notebook  *data_cleaning* used to clean/format the data for our vizualisations.
+  - **data** This folder holds the original data-set [covid19-cases-switzerland-master](https://github.com/daenuprobst/covid19-cases-switzerland) from Daniel Probst. You can also find our main jupyter notebook  *data_cleaning* used to clean/format the data for our visualizations.
   - **docs** This folder contains our report for the 2nd and 3rd Milestone. The most interesting one is the [Process Book](docs/LCELO_milestone3_dataviz.pdf) for Milestone 3.
   - **pre-processing** This folder contains the jupyter notebook and text for Milestone1.
   - **website** In this folder you will find all the code related to the website. *index.html* is the html of the website. There are also 6 sub folders:
     - assets: contains the code from the framework we used for the website design
-    - bubble_cloud: old folder form a vizualization we decided not to include
-    - data: the actual data used for the vizualization, generate from *data_cleaning*
+    - bubble_cloud: old folder form a visualization we decided not to include
+    - data: the actual data used for the visualization, generate from *data_cleaning*
     - lib: the code for the libraries we used, Jquery, D3 and TopoJson.
-    - scripts: the code we wrote for our vizualizations, this includes:
+    - scripts: the code we wrote for our visualizations, this includes:
       - *map.js* for the Switerland Map
       - *marimekko.js* for the hospital data with canton selection
       - *bar_chart.js* for the hospital data with overview of all cantons
