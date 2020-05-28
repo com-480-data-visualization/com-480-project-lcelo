@@ -3070,9 +3070,9 @@
 			}
 
 		.wrapper.style3 {
-			background-color: #000;
+			background-color: #131B23;
 			color: #bfbfbf;
-			background-image: url(../../images/bg.jpg);
+			/*background-image: url(../../images/bg.jpg);*/
 			background-size: cover;
 			background-attachment: fixed;
 			background-position: center;
@@ -3715,7 +3715,8 @@
 		-webkit-justify-content: center;
 		-ms-justify-content: center;
 		justify-content: center;
-		background-image: url("../../images/banner.jpg");
+		/*background-image: url("../../images/banner.jpg");*/
+		background-color: #6D8EA0;
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
